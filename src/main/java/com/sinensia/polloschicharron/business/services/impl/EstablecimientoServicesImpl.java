@@ -1,5 +1,6 @@
 package com.sinensia.polloschicharron.business.services.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,7 @@ public class EstablecimientoServicesImpl implements EstablecimientoServices {
 		boolean existe = ESTABLECIMIENTOS_DB.containsKey(NIF);
 		
 		if(NIF == null || existe) {
-			throw new IllegalStateException("el NIF [" + NIF + "] no es válido.");
+			throw new IllegalStateException("El NIF [" + NIF + "] no es válido.");
 		}
 		
 		ESTABLECIMIENTOS_DB.put(NIF, establecimiento);
@@ -46,7 +47,7 @@ public class EstablecimientoServicesImpl implements EstablecimientoServices {
 		boolean existe = ESTABLECIMIENTOS_DB.containsKey(NIF);
 		
 		if(NIF == null || !existe) {
-			throw new IllegalStateException("el establecimiento con NIF [" + NIF + "] no existe.");
+			throw new IllegalStateException("El establecimiento con NIF [" + NIF + "] no existe.");
 		}
 		
 		ESTABLECIMIENTOS_DB.replace(NIF, establecimiento);
@@ -55,14 +56,24 @@ public class EstablecimientoServicesImpl implements EstablecimientoServices {
 
 	@Override
 	public List<Establecimiento> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<>(ESTABLECIMIENTOS_DB.values());	
 	}
 
 	@Override
 	public List<Establecimiento> getByProvincia(String provincia) {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<Establecimiento> establecimientos = new ArrayList<>();
+		
+		for(Establecimiento establecimiento: ESTABLECIMIENTOS_DB.values()) {
+			
+			boolean contieneDireccion = establecimiento.getDireccion() != null;
+			
+			if(contieneDireccion && establecimiento.getDireccion().getProvincia().equals(provincia)) {
+				establecimientos.add(establecimiento);
+			}
+		}
+		
+		return establecimientos;
 	}
 	
 	// ********************************************

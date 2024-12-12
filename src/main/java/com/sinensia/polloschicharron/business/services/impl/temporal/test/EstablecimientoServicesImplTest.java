@@ -24,10 +24,18 @@ public class EstablecimientoServicesImplTest {
 		
 		System.out.println(optional.get()); // Comprobamos por consola de forma manual
 		
+		System.out.println("\n***************************************");
 		
-		// TODO probar el método getAll()
+		for(Establecimiento establecimiento: establecimientoServices.getAll()) {
+			System.out.println(establecimiento);
+		}
 		
-		// TODO probar el método getByProvincia(String provincia)
+		System.out.println("\n***************************************");
+		
+		for(Establecimiento establecimiento: establecimientoServices.getByProvincia("Madrid")) {
+			System.out.println(establecimiento);
+		}
+		
 
 	}
 
