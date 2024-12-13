@@ -6,9 +6,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.sinensia.polloschicharron.business.model.Familia;
 import com.sinensia.polloschicharron.business.services.FamiliaServices;
 
+@Service
 public class FamiliaServicesImpl implements FamiliaServices {
 
 	private final Map<Long, Familia> FAMILIAS_DB = new HashMap<>();
