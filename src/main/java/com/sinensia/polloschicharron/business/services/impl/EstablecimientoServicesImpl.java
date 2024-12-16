@@ -6,11 +6,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.sinensia.polloschicharron.business.model.DatosContacto;
 import com.sinensia.polloschicharron.business.model.Direccion;
 import com.sinensia.polloschicharron.business.model.Establecimiento;
 import com.sinensia.polloschicharron.business.services.EstablecimientoServices;
 
+@Service
 public class EstablecimientoServicesImpl implements EstablecimientoServices {
 
 	private final Map<String, Establecimiento> ESTABLECIMIENTOS_DB = new HashMap<>();
