@@ -1,0 +1,200 @@
+{
+	"info": {
+		"_postman_id": "2453c0fc-d9d2-48ef-b93c-39212a075391",
+		"name": "POLLOS CHICHARRON",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1059617"
+	},
+	"item": [
+		{
+			"name": "Empleados",
+			"item": [
+				{
+					"name": "GET ALL",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{puerto}}/empleados",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{puerto}}",
+							"path": [
+								"empleados"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET BY DNI",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{puerto}}/empleados/34009015K",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{puerto}}",
+							"path": [
+								"empleados",
+								"34009015K"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET BY DNI (inexistente)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{puerto}}/empleados/11111111R",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{puerto}}",
+							"path": [
+								"empleados",
+								"11111111R"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Establecimientos",
+			"item": [
+				{
+					"name": "GET",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{puerto}}/establecimientos?provincia=Barcelona",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{puerto}}",
+							"path": [
+								"establecimientos"
+							],
+							"query": [
+								{
+									"key": "provincia",
+									"value": "Barcelona"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET BY NIF",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{puerto}}/establecimientos/B27855671",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{puerto}}",
+							"path": [
+								"establecimientos",
+								"B27855671"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET BY NIF (inexistente)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{puerto}}/establecimientos/B00000000",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{puerto}}",
+							"path": [
+								"establecimientos",
+								"B00000000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Pollos Chicharrón - NUEVO CREADO DESDE POSTMAN\",\r\n    \"direccion\": {\r\n        \"direccion\": \"c/ Postman, 100\",\r\n        \"poblacion\": \"Sabt Cugat\",\r\n        \"codigoPostal\": \"08112\",\r\n        \"provincia\": \"Barcelona\",\r\n        \"pais\": \"España\"\r\n    },\r\n    \"datosContacto\": {\r\n        \"telefono\": \"+34 934209082\",\r\n        \"movil\": \"+34 620908425\",\r\n        \"email\": \"creadodesdepostman@polloschicharrones.com\"\r\n    },\r\n    \"nif\": \"B11111111\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{puerto}}/establecimientos",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{puerto}}",
+							"path": [
+								"establecimientos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Pollos Chicharrón - Vallés Nord (UPDATED)\",\r\n    \"direccion\": {\r\n        \"direccion\": \"c/ Industria, 2\",\r\n        \"poblacion\": \"Sabt Cugat\",\r\n        \"codigoPostal\": \"08112\",\r\n        \"provincia\": \"Barcelona\",\r\n        \"pais\": \"España\"\r\n    },\r\n    \"datosContacto\": {\r\n        \"telefono\": \"+34 932222222\",\r\n        \"movil\": \"+34 620908425\",\r\n        \"email\": \"vallesnord@polloschicharrones.com\"\r\n    },\r\n    \"nif\": \"B27855671\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{puerto}}/establecimientos",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{puerto}}",
+							"path": [
+								"establecimientos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

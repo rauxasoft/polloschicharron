@@ -30,7 +30,7 @@ public class EstablecimientoServicesImpl implements EstablecimientoServices {
 		boolean existe = ESTABLECIMIENTOS_DB.containsKey(NIF);
 		
 		if(NIF == null || existe) {
-			throw new IllegalStateException("El NIF [" + NIF + "] no es válido.");
+			throw new IllegalStateException("El NIF [" + NIF + "] no es válido o ya existe.");
 		}
 		
 		ESTABLECIMIENTOS_DB.put(NIF, establecimiento);
