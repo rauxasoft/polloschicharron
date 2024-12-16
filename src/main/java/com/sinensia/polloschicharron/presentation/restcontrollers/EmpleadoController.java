@@ -22,14 +22,8 @@ public class EmpleadoController {
 	
 	@GetMapping("/empleados")
 	public List<Empleado> getEmpleados(){
-		
-		List<Empleado> empleados = empleadoServices.getAll();
-		
-		return empleados;
+		return empleadoServices.getAll();
 	}
-	
-	// GET http://localhost:8080/empleados
-	// GET http://localhost:8080/empleados/46772312R 
 	
 	@GetMapping("/empleados/{dni}")
 	public ResponseEntity<?> getEmpleado(@PathVariable String dni) {

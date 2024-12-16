@@ -10,6 +10,5 @@ public class HttpErrorCustomizado {
 
 	public String getError() {
 		return error;
-	}
-
+	}	
 }
