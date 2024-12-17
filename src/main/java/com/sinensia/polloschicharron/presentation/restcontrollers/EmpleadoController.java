@@ -3,7 +3,6 @@ package com.sinensia.polloschicharron.presentation.restcontrollers;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +18,11 @@ import com.sinensia.polloschicharron.presentation.config.HttpErrorCustomizado;
 @RequestMapping("/empleados")
 public class EmpleadoController {
 
-	@Autowired
 	private EmpleadoServices empleadoServices;
+	
+	public EmpleadoController(EmpleadoServices empleadoServices) {
+		this.empleadoServices = empleadoServices;
+	}
 	
 	@GetMapping
 	public List<Empleado> getEmpleados(){
@@ -39,5 +41,5 @@ public class EmpleadoController {
 		
 		return ResponseEntity.of(optional);
 	}
-	
+
 }

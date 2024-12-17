@@ -3,7 +3,6 @@ package com.sinensia.polloschicharron.presentation.restcontrollers;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,22 +22,12 @@ import com.sinensia.polloschicharron.presentation.config.HttpErrorCustomizado;
 @RestController
 @RequestMapping("/establecimientos")
 public class EstablecimientoController {
-
-	/*
 	
-		VERBO   URL                                   BODY
-		======  ================================      ============ 
-		GET  	/establecimientos					      -
-		GET     /establecimientos?provincia=madrid        -
-
-		GET  	/establecimientos/B20990923               -
-		POST 	/establecimientos                        JSON
-		PUT     /establecimientos/B20990923              JSON
- 
-	 */
-	
-	@Autowired
 	private EstablecimientoServices establecimientoServices;
+	
+	public EstablecimientoController(EstablecimientoServices establecimientoServices) {
+		this.establecimientoServices = establecimientoServices;
+	}
 	
 	@GetMapping
 	public List<Establecimiento> getEstablecimientos(@RequestParam(required=false) String provincia){
@@ -93,6 +82,5 @@ public class EstablecimientoController {
 		return ResponseEntity.noContent().build();
 		
 	}
-	
 	
 }
