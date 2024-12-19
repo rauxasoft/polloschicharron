@@ -72,7 +72,6 @@ public class FamiliaController {
 		}
 		
 		return ResponseEntity.noContent().build();
-		
 	}
 
 }
