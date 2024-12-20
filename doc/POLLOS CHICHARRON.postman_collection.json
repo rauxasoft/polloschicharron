@@ -10,7 +10,21 @@
 			"name": "Empleados",
 			"item": [
 				{
-					"name": "GET ALL",
+					"name": "GET ALL EMPLEADOS",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -29,7 +43,21 @@
 					"response": []
 				},
 				{
-					"name": "GET BY DNI",
+					"name": "GET EMPLEADO BY DNI",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -49,7 +77,21 @@
 					"response": []
 				},
 				{
-					"name": "GET BY DNI (inexistente)",
+					"name": "GET EMPLEADO BY DNI (inexistente)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -74,7 +116,7 @@
 			"name": "Establecimientos",
 			"item": [
 				{
-					"name": "GET",
+					"name": "GET ALL ESTABLECIMIENTOS",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -99,7 +141,7 @@
 					"response": []
 				},
 				{
-					"name": "GET BY NIF",
+					"name": "GET ESTABLECIMIENTO BY NIF",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -119,7 +161,7 @@
 					"response": []
 				},
 				{
-					"name": "GET BY NIF (inexistente)",
+					"name": "GET ESTABLECIMIENTO BY NIF (inexistente)",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -139,7 +181,7 @@
 					"response": []
 				},
 				{
-					"name": "CREATE",
+					"name": "CREATE ESTABLECIMIENTO",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -167,7 +209,7 @@
 					"response": []
 				},
 				{
-					"name": "UPDATE",
+					"name": "UPDATE ESTABLECIMIENTO",
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -189,6 +231,175 @@
 							"port": "{{puerto}}",
 							"path": [
 								"establecimientos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Familias",
+			"item": [
+				{
+					"name": "GET ALL FAMILIAS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{puerto}}/familias",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{puerto}}",
+							"path": [
+								"familias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET FAMILIA BY ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const respuesta = pm.response.json();",
+									"",
+									"// console.log(respuesta['nombre']);",
+									"",
+									"pm.test(\"La manilia 2 es tal cosa\", () => {",
+									"",
+									"    pm.expect(respuesta['nombre']).equals('CERVEZAS');",
+									"   ",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{puerto}}/familias/56",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{puerto}}",
+							"path": [
+								"familias",
+								"56"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET FAMILIA BY ID (inexistente)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{puerto}}/familias/100",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{puerto}}",
+							"path": [
+								"familias",
+								"100"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE Familia",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"NUEVA_FAMILIA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{puerto}}/familias",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{puerto}}",
+							"path": [
+								"familias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE Familia",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 2,\r\n    \"nombre\": \"CERVEZAS ACTUALIZADAS\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{puerto}}/familias",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{puerto}}",
+							"path": [
+								"familias"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Productos",
+			"item": [
+				{
+					"name": "DELETE PRODUCTO",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{puerto}}/productos/1",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{puerto}}",
+							"path": [
+								"productos",
+								"1"
 							]
 						}
 					},
