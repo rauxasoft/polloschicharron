@@ -32,8 +32,16 @@ public interface ProductoServices {
 	
 	List<Producto> getAll();
 	
+	/**
+	 * Incluye los extremos
+	 * 
+	 */
 	List<Producto> getBetweenPriceRange(double min, double max);
 	
+	/**
+	 * Incluye los extremos
+	 * 
+	 */
 	List<Producto> getBetweenFechaAlta(Date desde, Date hasta);
 	
 	List<Producto> getByFamilia(Familia familia);

@@ -1,16 +1,20 @@
 package com.sinensia.polloschicharron.business.services.impl;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.sinensia.polloschicharron.business.model.Familia;
 import com.sinensia.polloschicharron.business.model.Producto;
 import com.sinensia.polloschicharron.business.services.ProductoServices;
 
+@Service
 public class ProductoServicesImpl implements ProductoServices{
 
 	private final Map<Long, Producto> PRODUCTOS_DB = new HashMap<>();
@@ -39,38 +43,71 @@ public class ProductoServicesImpl implements ProductoServices{
 
 	@Override
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
+		
+		boolean existe = PRODUCTOS_DB.containsKey(id);
+		
+		if(!existe) {
+			throw new IllegalStateException("No existe el producto con id " + id);
+		}
+		
+		PRODUCTOS_DB.remove(id);
 		
 	}
 
 	@Override
 	public List<Producto> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<>(PRODUCTOS_DB.values());
 	}
 
 	@Override
 	public List<Producto> getBetweenPriceRange(double min, double max) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<Producto> productos = new ArrayList<>();
+		
+		for(Producto producto: PRODUCTOS_DB.values()) {
+			if(producto.getPrecio() >= min && producto.getPrecio() <= max) {
+				productos.add(producto);
+			}
+		}
+		
+		return productos;
 	}
 
 	@Override
 	public List<Producto> getBetweenFechaAlta(Date desde, Date hasta) {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<Producto> productos = new ArrayList<>();
+		
+		for(Producto producto: PRODUCTOS_DB.values()) {
+			
+			int comp1 = producto.getFechaAlta().compareTo(desde); // -> +, 0, -
+			int comp2 = producto.getFechaAlta().compareTo(hasta); // -> +, 0, -
+			
+			if(comp1 >= 0 && comp2 <= 0) {
+				productos.add(producto);
+			}
+		}
+		
+		return productos;
 	}
 
 	@Override
 	public List<Producto> getByFamilia(Familia familia) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<Producto> productos = new ArrayList<>();
+		
+		for(Producto producto: PRODUCTOS_DB.values()) {
+			if(producto.getFamilia().equals(familia)) {
+				productos.add(producto);
+			}
+		}
+		
+		return productos;
 	}
 
 	@Override
 	public int getNumeroTotalProductos() {
-		// TODO Auto-generated method stub
-		return 0;
+		return PRODUCTOS_DB.size();
 	}
 
 	@Override
