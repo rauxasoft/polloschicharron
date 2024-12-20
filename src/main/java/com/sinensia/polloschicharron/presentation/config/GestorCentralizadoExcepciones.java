@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class GestorCentralizadoExcepciones extends ResponseEntityExceptionHandler{
 
+
 	// **********************************************************************************
 
 	@Override
@@ -32,6 +33,16 @@ public class GestorCentralizadoExcepciones extends ResponseEntityExceptionHandle
 		HttpErrorCustomizado httpErrorCustomizado = new HttpErrorCustomizado("El valor [" + ex.getValue() + "] es de tipo [" + tipoEntrante+ "]. Se requiere un tipo [" + tipoRequerido + "]");
 		
 		return ResponseEntity.badRequest().body(httpErrorCustomizado);
+	}
+	
+	// **********************************************************************************
+	
+	@ExceptionHandler(PresentationException.class)
+	public ResponseEntity<Object> handlePresentationException(PresentationException ex){
+	
+		HttpErrorCustomizado httpErrorCustomizado = new HttpErrorCustomizado(ex.getMessage());
+		
+		return new ResponseEntity<>(httpErrorCustomizado, ex.getHttpStatus());
 	}
 	
 	// **********************************************************************************

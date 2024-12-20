@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.sinensia.polloschicharron.business.model.Establecimiento;
 import com.sinensia.polloschicharron.business.services.EstablecimientoServices;
-import com.sinensia.polloschicharron.presentation.config.HttpErrorCustomizado;
+import com.sinensia.polloschicharron.presentation.config.PresentationException;
 
 @RestController
 @RequestMapping("/establecimientos")
@@ -44,16 +45,15 @@ public class EstablecimientoController {
 	}
 	
 	@GetMapping("/{nif}")
-	public ResponseEntity<?> getEstablecimiento(@PathVariable String nif){
+	public Establecimiento getEstablecimiento(@PathVariable String nif){
 		
 		Optional<Establecimiento> optional = establecimientoServices.read(nif);
 		
 		if(optional.isEmpty()) {
-			HttpErrorCustomizado httpErrorCustomizado = new HttpErrorCustomizado("No existe el establecimiento con NIF " + nif);
-			return new ResponseEntity<>(httpErrorCustomizado, HttpStatus.NOT_FOUND);
+			throw new PresentationException("No existe el establecimiento con NIF " + nif, HttpStatus.NOT_FOUND);
 		}
 		
-		return ResponseEntity.of(optional);
+		return optional.get();
 	}
 	
 	@PostMapping
@@ -62,25 +62,21 @@ public class EstablecimientoController {
 		try {
 			establecimientoServices.create(establecimiento);
 		} catch(IllegalStateException e) {
-			HttpErrorCustomizado httpErrorCustomizado = new HttpErrorCustomizado(e.getMessage());
-			return new ResponseEntity<>(httpErrorCustomizado, HttpStatus.BAD_REQUEST);
+			throw new PresentationException(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		
 		return ResponseEntity.created(ucb.path("/establecimientos/{nif}").build(establecimiento.getNIF())).build();
 	}
 	
 	@PutMapping
-	public ResponseEntity<?> updateEstablecimiento(@RequestBody Establecimiento establecimiento) {
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void updateEstablecimiento(@RequestBody Establecimiento establecimiento) {
 		
 		try {
 			establecimientoServices.update(establecimiento);
 		} catch(IllegalStateException e) {
-			HttpErrorCustomizado httpErrorCustomizado = new HttpErrorCustomizado(e.getMessage());
-			return new ResponseEntity<>(httpErrorCustomizado, HttpStatus.BAD_REQUEST);
-		}
-		
-		return ResponseEntity.noContent().build();
-		
+			throw new PresentationException(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}	
 	}
 	
 }

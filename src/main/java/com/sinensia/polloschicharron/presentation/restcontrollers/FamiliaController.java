@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.sinensia.polloschicharron.business.model.Familia;
 import com.sinensia.polloschicharron.business.services.FamiliaServices;
-import com.sinensia.polloschicharron.presentation.config.HttpErrorCustomizado;
+import com.sinensia.polloschicharron.presentation.config.PresentationException;
 
 @RestController
 @RequestMapping("/familias")
@@ -34,16 +35,15 @@ public class FamiliaController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<?> getFamilia(@PathVariable Long id){
+	public Familia getFamilia(@PathVariable Long id){
 		
 		Optional<Familia> optional = familiaServices.read(id);
 		
 		if(optional.isEmpty()) {
-			HttpErrorCustomizado httpErrorCustomizado = new HttpErrorCustomizado("No existe la familia con id " + id);
-			return new ResponseEntity<>(httpErrorCustomizado, HttpStatus.NOT_FOUND);
+			throw new PresentationException("No existe la familia con id " + id, HttpStatus.NOT_FOUND);
 		}
 		
-		return ResponseEntity.of(optional);
+		return optional.get();
 	}
 	
 	@PostMapping
@@ -54,24 +54,21 @@ public class FamiliaController {
 		try {
 			id = familiaServices.create(familia);
 		} catch(IllegalStateException e) {
-			HttpErrorCustomizado httpErrorCustomizado = new HttpErrorCustomizado(e.getMessage());
-			return new ResponseEntity<>(httpErrorCustomizado, HttpStatus.BAD_REQUEST);
+			throw new PresentationException(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		
 		return ResponseEntity.created(ucb.path("/familias/{id}").build(id)).build();
 	}
 	
 	@PutMapping
-	public ResponseEntity<?> updateFamilia(@RequestBody Familia familia) {
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void updateFamilia(@RequestBody Familia familia) {
 		
 		try {
 			familiaServices.update(familia);
 		} catch(IllegalStateException e) {
-			HttpErrorCustomizado httpErrorCustomizado = new HttpErrorCustomizado(e.getMessage());
-			return new ResponseEntity<>(httpErrorCustomizado, HttpStatus.BAD_REQUEST);
-		}
-		
-		return ResponseEntity.noContent().build();
+			throw new PresentationException(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}	
 	}
 
 }
