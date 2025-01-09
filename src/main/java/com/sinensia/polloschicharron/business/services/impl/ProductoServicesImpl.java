@@ -58,21 +58,16 @@ public class ProductoServicesImpl implements ProductoServices{
 	public List<Producto> getAll() {
 		return new ArrayList<>(PRODUCTOS_DB.values());
 	}
-
+	
 	@Override
 	public List<Producto> getBetweenPriceRange(double min, double max) {
 		
-		List<Producto> productos = new ArrayList<>();
-		
-		for(Producto producto: PRODUCTOS_DB.values()) {
-			if(producto.getPrecio() >= min && producto.getPrecio() <= max) {
-				productos.add(producto);
-			}
-		}
-		
-		return productos;
+		return PRODUCTOS_DB.values().stream()
+				.filter(x -> x.getPrecio() >= min && x.getPrecio() <= max)
+				.toList();	
 	}
 
+	// ESTE
 	@Override
 	public List<Producto> getBetweenFechaAlta(Date desde, Date hasta) {
 
@@ -91,6 +86,7 @@ public class ProductoServicesImpl implements ProductoServices{
 		return productos;
 	}
 
+	// ESTE
 	@Override
 	public List<Producto> getByFamilia(Familia familia) {
 		
@@ -110,18 +106,21 @@ public class ProductoServicesImpl implements ProductoServices{
 		return PRODUCTOS_DB.size();
 	}
 
+	// ESTE
 	@Override
 	public int getNumeroTotalProductosByFamilia(Familia familia) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	// ESTE
 	@Override
 	public void incrementarPrecio(Familia familia, double porcentaje) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	// ESTE
 	@Override
 	public void incrementarPrecio(List<Producto> productos, double porcentaje) {
 		// TODO Auto-generated method stub
@@ -134,12 +133,14 @@ public class ProductoServicesImpl implements ProductoServices{
 		
 	}
 
+	// ESTE
 	@Override
 	public Map<Familia, Integer> getEstadisticaNumeroProductosPorFamilia() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	// ESTE
 	@Override
 	public Map<Familia, Double> getEstadisticaPrecioMedioProductosPorFamilia() {
 		// TODO Auto-generated method stub
