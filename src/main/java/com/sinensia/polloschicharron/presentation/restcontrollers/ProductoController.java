@@ -1,5 +1,6 @@
 package com.sinensia.polloschicharron.presentation.restcontrollers;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sinensia.polloschicharron.business.model.Familia;
+import com.sinensia.polloschicharron.business.model.Producto;
 import com.sinensia.polloschicharron.business.services.ProductoServices;
 import com.sinensia.polloschicharron.presentation.config.HttpErrorCustomizado;
 
@@ -22,6 +24,11 @@ public class ProductoController {
 	
 	public ProductoController(ProductoServices productosServices) {
 		this.productoServices = productosServices;
+	}
+	
+	@GetMapping
+	public List<Producto> getAll(){
+		return productoServices.getAll();
 	}
 	
 	@DeleteMapping("/{id}")
@@ -56,9 +63,9 @@ public class ProductoController {
 		return productoServices.getEstadisticaNumeroProductosPorFamilia();
 	}
 	
+	
 	// Operaciones CRUD 
 	
-	// "getAll"
 	// "getByFamilia"
 
 }

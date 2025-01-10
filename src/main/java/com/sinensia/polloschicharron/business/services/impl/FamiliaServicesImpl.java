@@ -1,9 +1,6 @@
 package com.sinensia.polloschicharron.business.services.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -14,87 +11,28 @@ import com.sinensia.polloschicharron.business.services.FamiliaServices;
 @Service
 public class FamiliaServicesImpl implements FamiliaServices {
 
-	private final Map<Long, Familia> FAMILIAS_DB = new HashMap<>();
-	
-	public FamiliaServicesImpl() {
-		init();
-	}
-		
 	@Override
 	public Long create(Familia familia) {
-		
-		if(familia.getId() != null) {
-			throw new IllegalStateException("Para crear una familia el id ha de ser null.");
-		}
-		
-		boolean existe = true;
-		Long idRandom = null;
-		
-		while(existe) {
-			idRandom = (long) (Math.random() * 1000000000000L);
-			existe = FAMILIAS_DB.containsKey(idRandom);
-		}
-		
-		familia.setId(idRandom);
-		
-		FAMILIAS_DB.put(idRandom, familia);
-	
-		return idRandom;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public Optional<Familia> read(Long id) {
-		return Optional.ofNullable(FAMILIAS_DB.get(id));
+		// TODO Auto-generated method stub
+		return Optional.empty();
 	}
 
 	@Override
 	public void update(Familia familia) {
-		
-		Long id = familia.getId(); 
-		
-		boolean existe = FAMILIAS_DB.containsKey(id);
-		
-		if(!existe) {
-			throw new IllegalStateException("La familia con ID [" + id + "] no existe.");
-		}
-		
-		FAMILIAS_DB.replace(id, familia);
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public List<Familia> getAll() {
-		return new ArrayList<>(FAMILIAS_DB.values());
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
-	// ********************************************
-	//
-	// Private Methods
-	//
-	// ********************************************
-		
-	private void init() {
-		
-		Familia familia1 = new Familia();
-		Familia familia2 = new Familia();
-		Familia familia3 = new Familia();
-		Familia familia4 = new Familia();
-		
-		familia1.setId(2L);
-		familia2.setId(3L);
-		familia3.setId(4L);
-		familia4.setId(5L);
-		
-		familia1.setNombre("CERVEZAS");
-		familia2.setNombre("TAPAS");
-		familia3.setNombre("POSTRES");
-		familia4.setNombre("CAFES");
-		
-		FAMILIAS_DB.put(familia1.getId(), familia1);
-		FAMILIAS_DB.put(familia2.getId(), familia2);
-		FAMILIAS_DB.put(familia3.getId(), familia3);
-		FAMILIAS_DB.put(familia4.getId(), familia4);
-		
-	}
-
 }

@@ -3,13 +3,32 @@ package com.sinensia.polloschicharron.business.model;
 import java.util.Date;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.persistence.Transient;
+
+@Entity
+@Table(name="PRODUCTOS")
 public class Producto {
-		
-	private Long id; // surrogate key
+	
+	@Id
+	@Column(name="CODIGO")
+	private Long id;
+	
 	private String nombre;
+	
+	@Temporal(TemporalType.DATE)
 	private Date fechaAlta;
+	
 	private boolean descatalogado;
+	
+	@Transient
 	private Familia familia;
+	
 	private Double precio;
 	
 	public Producto() {
