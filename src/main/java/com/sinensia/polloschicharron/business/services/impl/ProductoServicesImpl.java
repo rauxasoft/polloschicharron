@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -63,42 +64,31 @@ public class ProductoServicesImpl implements ProductoServices{
 	public List<Producto> getBetweenPriceRange(double min, double max) {
 		
 		return PRODUCTOS_DB.values().stream()
-				.filter(x -> x.getPrecio() >= min && x.getPrecio() <= max)
+				.filter(producto -> producto.getPrecio() >= min && producto.getPrecio() <= max)
 				.toList();	
 	}
 
-	// ESTE
 	@Override
 	public List<Producto> getBetweenFechaAlta(Date desde, Date hasta) {
 
-		List<Producto> productos = new ArrayList<>();
-		
-		for(Producto producto: PRODUCTOS_DB.values()) {
+		return PRODUCTOS_DB.values().stream()
+		.filter(producto -> {
 			
 			int comp1 = producto.getFechaAlta().compareTo(desde); // -> +, 0, -
 			int comp2 = producto.getFechaAlta().compareTo(hasta); // -> +, 0, -
 			
-			if(comp1 >= 0 && comp2 <= 0) {
-				productos.add(producto);
-			}
-		}
-		
-		return productos;
+			return (comp1 >= 0 && comp2 <= 0);
+		})
+		.toList();	
 	}
 
-	// ESTE
 	@Override
 	public List<Producto> getByFamilia(Familia familia) {
 		
-		List<Producto> productos = new ArrayList<>();
+		return PRODUCTOS_DB.values().stream()
+				.filter(producto -> producto.getFamilia().equals(familia))
+				.toList();	
 		
-		for(Producto producto: PRODUCTOS_DB.values()) {
-			if(producto.getFamilia().equals(familia)) {
-				productos.add(producto);
-			}
-		}
-		
-		return productos;
 	}
 
 	@Override
@@ -106,11 +96,12 @@ public class ProductoServicesImpl implements ProductoServices{
 		return PRODUCTOS_DB.size();
 	}
 
-	// ESTE
 	@Override
 	public int getNumeroTotalProductosByFamilia(Familia familia) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return (int) PRODUCTOS_DB.values().stream()
+				.filter(producto -> producto.getFamilia().equals(familia))
+				.count();
 	}
 
 	// ESTE
@@ -133,11 +124,15 @@ public class ProductoServicesImpl implements ProductoServices{
 		
 	}
 
-	// ESTE
 	@Override
 	public Map<Familia, Integer> getEstadisticaNumeroProductosPorFamilia() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return PRODUCTOS_DB.values().stream()
+				.collect(Collectors.groupingBy(
+						Producto::getFamilia, 
+						Collectors.collectingAndThen(
+								Collectors.counting(), 
+								Long::intValue)));
 	}
 
 	// ESTE
