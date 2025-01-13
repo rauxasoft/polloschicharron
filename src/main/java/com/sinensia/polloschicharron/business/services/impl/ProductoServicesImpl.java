@@ -20,8 +20,7 @@ public class ProductoServicesImpl implements ProductoServices{
 	public ProductoServicesImpl(ProductoRepository productoRepository) {
 		this.productoRepository = productoRepository;
 	}
-	
-	
+
 	@Override
 	public Long create(Producto producto) {
 		// TODO Auto-generated method stub
