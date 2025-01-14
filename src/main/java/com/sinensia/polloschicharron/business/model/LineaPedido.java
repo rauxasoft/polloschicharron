@@ -1,8 +1,16 @@
 package com.sinensia.polloschicharron.business.model;
 
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
+@Embeddable
 public class LineaPedido {
 
+	@ManyToOne
+	@JoinColumn(name="CODIGO_PRODUCTO")
 	private Producto producto;
+	
 	private Double precio;
 	private int cantidad;
 	

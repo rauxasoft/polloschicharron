@@ -5,14 +5,18 @@ import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OrderColumn;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-import jakarta.persistence.Transient;
 
 @Entity
 @Table(name="PEDIDOS")
@@ -25,10 +29,12 @@ public class Pedido {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaHora;
 	
-	@Transient
+	@ManyToOne
+	@JoinColumn(name="CODIGO_EMPLEADO")
 	private Empleado responsable;
 	
-	@Transient
+	@ManyToOne
+	@JoinColumn(name="CODIGO_CLIENTE")
 	private Cliente cliente;
 	
 	@Enumerated(EnumType.STRING)
@@ -37,7 +43,9 @@ public class Pedido {
 	@Column(name="COMENTARIO")
 	private String observaciones;
 	
-	@Transient
+	@ElementCollection
+	@JoinTable(name="LINEAS_PEDIDO", joinColumns = @JoinColumn(name="CODIGO_PEDIDO"))
+	@OrderColumn(name="ORDEN")
 	private List<LineaPedido> lineas;
 	
 	public Pedido() {
