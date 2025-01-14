@@ -2,9 +2,17 @@ package com.sinensia.polloschicharron.business.model;
 
 import java.util.Objects;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="FAMILIAS")
 public class Familia {
 
+	@Id
 	private Long id;
+	
 	private String nombre;
 	
 	public Familia() {

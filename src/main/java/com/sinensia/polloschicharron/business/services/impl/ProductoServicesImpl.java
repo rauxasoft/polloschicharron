@@ -62,8 +62,7 @@ public class ProductoServicesImpl implements ProductoServices{
 
 	@Override
 	public List<Producto> getByFamilia(Familia familia) {
-		// TODO Auto-generated method stub
-		return null;
+		return productoRepository.findByFamilia(familia);
 	}
 
 	@Override

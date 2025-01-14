@@ -7,10 +7,17 @@ import org.springframework.stereotype.Service;
 
 import com.sinensia.polloschicharron.business.model.Familia;
 import com.sinensia.polloschicharron.business.services.FamiliaServices;
+import com.sinensia.polloschicharron.integration.repositories.FamiliaRepository;
 
 @Service
 public class FamiliaServicesImpl implements FamiliaServices {
 
+	private FamiliaRepository familiaRepository;
+	
+	public FamiliaServicesImpl(FamiliaRepository familiaRepository) {
+		this.familiaRepository = familiaRepository;
+	}
+	
 	@Override
 	public Long create(Familia familia) {
 		// TODO Auto-generated method stub
@@ -31,8 +38,7 @@ public class FamiliaServicesImpl implements FamiliaServices {
 
 	@Override
 	public List<Familia> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return familiaRepository.findAll();
 	}
 	
 }

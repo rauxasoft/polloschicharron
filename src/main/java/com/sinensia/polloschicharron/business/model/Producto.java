@@ -6,10 +6,11 @@ import java.util.Objects;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-import jakarta.persistence.Transient;
 
 @Entity
 @Table(name="PRODUCTOS")
@@ -26,10 +27,12 @@ public class Producto {
 	
 	private boolean descatalogado;
 	
-	@Transient
+	@ManyToOne
+	@JoinColumn(name="ID_FAMILIA")
 	private Familia familia;
 	
 	private Double precio;
+	private String descripcion;
 	
 	public Producto() {
 		
@@ -81,6 +84,14 @@ public class Producto {
 
 	public void setPrecio(Double precio) {
 		this.precio = precio;
+	}
+	
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	@Override
