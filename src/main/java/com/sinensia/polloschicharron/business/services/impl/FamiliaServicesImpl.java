@@ -9,6 +9,8 @@ import com.sinensia.polloschicharron.business.model.Familia;
 import com.sinensia.polloschicharron.business.services.FamiliaServices;
 import com.sinensia.polloschicharron.integration.repositories.FamiliaRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class FamiliaServicesImpl implements FamiliaServices {
 
@@ -19,20 +21,36 @@ public class FamiliaServicesImpl implements FamiliaServices {
 	}
 	
 	@Override
+	@Transactional
 	public Long create(Familia familia) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		if(familia.getId() != null) {
+			throw new IllegalStateException("Para crear una familia el id ha de ser null.");
+		}
+		
+		Familia createdFamilia = familiaRepository.save(familia);
+		
+		return createdFamilia.getId();
 	}
-
+	
 	@Override
 	public Optional<Familia> read(Long id) {
-		// TODO Auto-generated method stub
-		return Optional.empty();
+		return familiaRepository.findById(id);
 	}
 
 	@Override
+	@Transactional
 	public void update(Familia familia) {
-		// TODO Auto-generated method stub
+
+		Long id = familia.getId(); 
+		
+		boolean existe = familiaRepository.existsById(id);
+		
+		if(!existe) {
+			throw new IllegalStateException("La familia con ID [" + id + "] no existe.");
+		}
+		
+		familiaRepository.save(familia);
 		
 	}
 

@@ -7,38 +7,64 @@ import org.springframework.stereotype.Service;
 
 import com.sinensia.polloschicharron.business.model.Establecimiento;
 import com.sinensia.polloschicharron.business.services.EstablecimientoServices;
+import com.sinensia.polloschicharron.integration.repositories.EstablecimientoRepository;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class EstablecimientoServicesImpl implements EstablecimientoServices {
 
+	private EstablecimientoRepository establecimientoRepository;
+	
+	public EstablecimientoServicesImpl(EstablecimientoRepository establecimientoRepository) {
+		this.establecimientoRepository = establecimientoRepository;
+	}
+	
 	@Override
+	@Transactional
 	public void create(Establecimiento establecimiento) {
-		// TODO Auto-generated method stub
+
+		String NIF = establecimiento.getNIF();
+		
+		boolean existe = establecimientoRepository.existsById(NIF);
+		
+		if(NIF == null || existe) {
+			throw new IllegalStateException("El NIF [" + NIF + "] no es válido o ya existe.");
+		}
+		
+		establecimientoRepository.save(establecimiento);
 		
 	}
 
 	@Override
 	public Optional<Establecimiento> read(String NIF) {
-		// TODO Auto-generated method stub
-		return Optional.empty();
+		return establecimientoRepository.findById(NIF);
 	}
 
 	@Override
+	@Transactional
 	public void update(Establecimiento establecimiento) {
-		// TODO Auto-generated method stub
+
+		String NIF = establecimiento.getNIF();
+		
+		boolean existe = establecimientoRepository.existsById(NIF);
+		
+		if(NIF == null || !existe) {
+			throw new IllegalStateException("El establecimiento con NIF [" + NIF + "] no existe.");
+		}
+		
+		establecimientoRepository.save(establecimiento);
 		
 	}
 
 	@Override
 	public List<Establecimiento> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return establecimientoRepository.findAll();
 	}
 
 	@Override
 	public List<Establecimiento> getByProvincia(String provincia) {
-		// TODO Auto-generated method stub
-		return null;
+		return establecimientoRepository.findByDireccionProvincia(provincia);
 	}
 	
 }

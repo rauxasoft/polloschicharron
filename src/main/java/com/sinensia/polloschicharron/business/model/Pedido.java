@@ -4,14 +4,40 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.persistence.Transient;
+
+@Entity
+@Table(name="PEDIDOS")
 public class Pedido {
 	
+	@Id
+	@Column(name="CODIGO")
 	private Long id;
+	
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaHora;
+	
+	@Transient
 	private Empleado responsable;
+	
+	@Transient
 	private Cliente cliente;
+	
+	@Enumerated(EnumType.STRING)
 	private EstadoPedido estado;
+	
+	@Column(name="COMENTARIO")
 	private String observaciones;
+	
+	@Transient
 	private List<LineaPedido> lineas;
 	
 	public Pedido() {

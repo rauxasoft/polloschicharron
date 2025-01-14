@@ -83,3 +83,123 @@ INSERT INTO PRODUCTOS (CODIGO, NOMBRE, DESCRIPCION, FECHA_ALTA, PRECIO, DESCATAL
 (167,'Madalena Integral', null, '2017-10-25', 2.7, FALSE, 11),
 (168,'Madalena Integral Pequeña', null, '2017-10-25', 1.5, FALSE, 11),
 (169,'Pastéis de Belem (2 piezas)', 'Deliciosos pastelitos traidos en helicoptero cada mañana desde Lisboa.', '2018-10-22', 3.5, FALSE, 11);
+
+INSERT INTO ESTABLECIMIENTOS (NIF,
+							  NOMBRE_COMERCIAL,
+							  DIRECCION,
+							  POBLACION,
+							  PROVINCIA,
+							  CODIGO_POSTAL,
+							  PAIS,
+							  TELEFONO,
+							  MOVIL,
+							  EMAIL,
+							  FECHA_INAUGURACION) VALUES
+('B38983321', 'Gran Via 2', 'Gran Via de Les Corts Catalanes, 345', 'Barcelona', 'Barcelona','08034', 'España', '+34 932247078', null, 'granvia2@pollosfelices.com', '2003-10-20'),
+('B00177845', 'Vaguada', 'Av. de Monforte de Lemos, 36', 'Madrid', 'Madrid','28029', 'España', '+34 913682828', '620897644', 'lavaguada@pollosfelices.com', '2011-08-14');
+
+INSERT INTO PERSONAS(CODIGO, 
+					 DNI,
+					 NOMBRE,
+					 APELLIDO1,
+					 APELLIDO2,
+					 DIRECCION,
+					 POBLACION,
+					 CODIGO_POSTAL,
+					 PROVINCIA,
+					 PAIS,
+					 TELEFONO,
+					 MOVIL,
+					 EMAIL) VALUES
+(10, '45899812L', 'Marta', 'Quesada', 'Olmos', 'c/Marina, 234 2º 1ª', 'Barcelona', '08014', 'Barcelona', 'España', '932318811', null, 'apax344@hotmail.com'),
+(11, '30092765K', 'José Ramón', 'Peña', 'Ojeda', 'c/Muntaner, 230 ', 'Barcelona', '08020', 'Barcelona', 'España', '93 2209088', '620109034', 'jr200@gmail.com'),
+(12, '45011723P', 'Carlos Jesús', 'Olmedo', 'Cierco', null, 'Madrid', null, 'Madrid', 'España', null, null, 'carlosj20@gmail.com'),
+(13, 'X58993234', 'Walter', 'Peralta', null, 'c/ Juan Soldevila, 34 ático 1', 'Teruel', '28933', 'Teruel', 'España', '982209090', null, 'jsprod34@hotmail.com'),
+(14, '40922311S', 'Anna', 'Balcells', 'Rius', 'Avda. Del Roble, 230', 'Santa Coloma de Gramanet', '08921', 'Barcelona', 'España', '934567809', '609908756', 'balc.rius@hotmail.com'),
+(15, '30998123T', 'Enric', 'Balcells', 'Rius', 'c/ Republica 201', 'Barcelona', '08003', 'Barcelona', 'España', '932209012', null, 'enric.enric@hotmail.com');
+
+INSERT INTO CLIENTES(CODIGO, GOLD) VALUES
+(10, true),
+(12, false);
+
+INSERT INTO EMPLEADOS(CODIGO, LICENCIA_MANIPULADOR_ALIMENTOS) VALUES
+(11, 'LMA200912T'),
+(13, 'LMA009200S'),
+(14, 'LMA201222R'),
+(15, 'LMA200001T');
+
+INSERT INTO PEDIDOS (CODIGO, FECHA_HORA, CODIGO_EMPLEADO, ESTADO, CODIGO_CLIENTE, NIF_ESTABLECIMIENTO) VALUES
+(1000, '2023-04-17 09:01:42.069', 11, 'SERVIDO', null, 'B38983321'),
+(1001, '2023-04-17 09:05:13.012', 13, 'SERVIDO', null, 'B00177845'),
+(1002, '2023-04-17 09:12:11.134', 11, 'SERVIDO', null, 'B38983321'),
+(1003, '2023-04-17 09:22:02.234', 15, 'CANCELADO', null, 'B00177845'),
+(1004, '2023-04-17 09:23:17.123', 11, 'SERVIDO', null, 'B38983321'),
+(1005, '2023-04-17 09:25:39.009', 11, 'SERVIDO', null, 'B38983321'),
+(1006, '2023-04-17 09:31:23.204', 15, 'SERVIDO', null, 'B38983321'),
+(1007, '2023-04-17 09:37:43.401', 11, 'SERVIDO', 10, 'B38983321'),
+(1008, '2023-04-17 09:42:54.403', 15, 'SERVIDO', null, 'B00177845'),
+(1009, '2023-04-17 09:48:33.500', 11, 'SERVIDO', null, 'B38983321'),
+(1010, '2023-04-17 09:51:19.030', 11, 'EN_PROCESO', null, 'B38983321'),
+(1011, '2023-04-17 09:58:13.509', 13, 'SERVIDO', null, 'B38983321'),
+(1012, '2023-04-17 10:00:07.124', 11, 'PENDIENTE_ENTREGA', 10, 'B38983321'),
+(1013, '2023-04-17 10:06:10.222', 13, 'PENDIENTE_ENTREGA', null, 'B38983321'),
+(1014, '2023-04-17 10:14:51.298', 15, 'NUEVO', null, 'B00177845');
+
+UPDATE PEDIDOS SET comentario = '1234567890ABCDEFGHIJXXXXXXXXX' WHERE CODIGO = 1000;
+UPDATE PEDIDOS SET comentario = '1234567890ABCDEFGHIJ' WHERE CODIGO = 1001;
+UPDATE PEDIDOS SET comentario = '12345' WHERE CODIGO = 1002;
+
+INSERT INTO LINEAS_PEDIDO (CODIGO_PEDIDO, CODIGO_PRODUCTO, CANTIDAD, PRECIO) VALUES
+(1000, 100, 2, 6.0),
+(1000, 103, 8, 3.0),
+(1001, 102, 1, 3.0),
+(1002, 137, 2, 1.2),
+(1002, 108, 1, 7.7),
+(1002, 115, 1, 2.5),
+(1002, 120, 1, 1.7),
+(1003, 159, 1, 2.0),
+(1003, 137, 1, 1.2),
+(1004, 108, 1, 7.7),
+(1004, 103, 1, 3.0),
+(1004, 105, 1, 8.5),
+(1004, 137, 1, 1.2),
+(1004, 156, 3, 1.5),
+(1005, 156, 2, 1.5),
+(1006, 156, 2, 1.5),
+(1006, 158, 1, 1.5),
+(1006, 120, 1, 1.7),
+(1006, 104, 1, 6.7),
+(1007, 156, 3, 1.5),
+(1007, 158, 1, 1.5),
+(1007, 115, 1, 2.5),
+(1007, 110, 2, 8.0),
+(1007, 139, 1, 2.0),
+(1007, 121, 1, 1.7),
+(1007, 111, 1, 7.0),
+(1007, 103, 2, 3.0),
+(1007, 161, 2, 2.5),
+(1007, 162, 1, 2.5),
+(1008, 159, 2, 2.0),
+(1008, 163, 1, 2.6),
+(1008, 137, 3, 1.2),
+(1008, 109, 1, 6.7),
+(1008, 161, 1, 2.5),
+(1008, 117, 1, 2.5),
+(1009, 166, 1, 2.7),
+(1009, 157, 1, 1.8),
+(1009, 162, 1, 2.5),
+(1010, 107, 1, 7.0),
+(1010, 120, 1, 1.7),
+(1010, 156, 1, 1.5),
+(1011, 167, 1, 2.7),
+(1011, 161, 1, 2.5),
+(1012, 159, 1, 2.0),
+(1012, 161, 2, 2.5),
+(1013, 159, 2, 2.0),
+(1013, 164, 1, 2.9),
+(1013, 157, 1, 1.8),
+(1014, 108, 1, 7.7),
+(1014, 103, 1, 3.0),
+(1014, 166, 1, 2.7),
+(1014, 156, 3, 1.5),
+(1014, 102, 2, 2.5);

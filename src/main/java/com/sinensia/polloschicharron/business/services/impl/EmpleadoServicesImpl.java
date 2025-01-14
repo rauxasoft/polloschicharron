@@ -7,20 +7,25 @@ import org.springframework.stereotype.Service;
 
 import com.sinensia.polloschicharron.business.model.Empleado;
 import com.sinensia.polloschicharron.business.services.EmpleadoServices;
+import com.sinensia.polloschicharron.integration.repositories.EmpleadoRepository;
 
 @Service
 public class EmpleadoServicesImpl implements EmpleadoServices {
 
+	private EmpleadoRepository empleadoRepository;
+	
+	public EmpleadoServicesImpl(EmpleadoRepository empleadoRepository) {
+		this.empleadoRepository = empleadoRepository;
+	}
+	
 	@Override
 	public Optional<Empleado> read(String DNI) {
-		// TODO Auto-generated method stub
-		return Optional.empty();
+		return empleadoRepository.findById(DNI);
 	}
 
 	@Override
 	public List<Empleado> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return empleadoRepository.findAll();
 	}
 	
 }

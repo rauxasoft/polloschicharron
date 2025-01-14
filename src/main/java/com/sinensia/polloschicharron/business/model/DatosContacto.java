@@ -2,6 +2,9 @@ package com.sinensia.polloschicharron.business.model;
 
 import java.util.Objects;
 
+import jakarta.persistence.Embeddable;
+
+@Embeddable
 public class DatosContacto {
 
 	private String telefono;

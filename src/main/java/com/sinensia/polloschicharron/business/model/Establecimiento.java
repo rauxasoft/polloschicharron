@@ -2,11 +2,26 @@ package com.sinensia.polloschicharron.business.model;
 
 import java.util.Objects;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="ESTABLECIMIENTOS")
 public class Establecimiento {
 	
+	@Id
 	private String NIF; // business key
+	
+	@Column(name="NOMBRE_COMERCIAL")
 	private String nombre;
+	
+	@Embedded
 	private Direccion direccion;
+	
+	@Embedded
 	private DatosContacto datosContacto;
 	
 	public Establecimiento() {

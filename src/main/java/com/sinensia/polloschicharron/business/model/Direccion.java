@@ -1,5 +1,8 @@
 package com.sinensia.polloschicharron.business.model;
 
+import jakarta.persistence.Embeddable;
+
+@Embeddable
 public class Direccion {
 
 	private String direccion;
