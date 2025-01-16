@@ -64,7 +64,7 @@ public class EstablecimientoServicesImpl implements EstablecimientoServices {
 
 	@Override
 	public List<Establecimiento> getByProvincia(String provincia) {
-		return establecimientoRepository.findByDireccionProvincia(provincia);
+		return establecimientoRepository.findByDireccionProvinciaIgnoreCase(provincia);
 	}
 	
 }

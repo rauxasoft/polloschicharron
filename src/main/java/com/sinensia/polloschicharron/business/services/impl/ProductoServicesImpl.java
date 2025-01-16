@@ -12,6 +12,8 @@ import com.sinensia.polloschicharron.business.model.Producto;
 import com.sinensia.polloschicharron.business.services.ProductoServices;
 import com.sinensia.polloschicharron.integration.repositories.ProductoRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class ProductoServicesImpl implements ProductoServices{
 
@@ -21,30 +23,52 @@ public class ProductoServicesImpl implements ProductoServices{
 		this.productoRepository = productoRepository;
 	}
 
-	// ESTE
 	@Override
+	@Transactional
 	public Long create(Producto producto) {
-		// TODO ESTE
-		return null;
+		
+		if(producto.getId() != null) {
+			throw new IllegalStateException("Para crear un producto el id ha de ser null.");
+		}
+		
+		Producto createdProducto = productoRepository.save(producto);
+		
+		return createdProducto.getId();
 	}
 
-	// ESTE
 	@Override
 	public Optional<Producto> read(Long id) {
-		// TODO ESTE
-		return Optional.empty();
+		return productoRepository.findById(id);
 	}
 
-	// ESTE
 	@Override
+	@Transactional
 	public void update(Producto producto) {
-		// TODO ESTE
+
+		Long id = producto.getId(); 
+		
+		boolean existe = productoRepository.existsById(id);
+		
+		if(!existe) {
+			throw new IllegalStateException("El producto con ID [" + id + "] no existe.");
+		}
+		
+		productoRepository.save(producto);
 		
 	}
 
 	@Override
+	@Transactional
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
+		
+		boolean existe = productoRepository.existsById(id);
+		
+		if(!existe) {
+			throw new IllegalStateException("El producto con ID [" + id + "] no existe.");	
+		}
+		
+		Optional<Producto> optional = productoRepository.findById(id);
+		optional.get().setDescatalogado(true);
 		
 	}
 
