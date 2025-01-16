@@ -9,6 +9,7 @@ import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
@@ -24,6 +25,7 @@ public class Pedido {
 	
 	@Id
 	@Column(name="CODIGO")
+	@GeneratedValue(generator = "PEDIDO_SEQ")
 	private Long id;
 	
 	@Temporal(TemporalType.TIMESTAMP)
@@ -44,7 +46,8 @@ public class Pedido {
 	private String observaciones;
 	
 	@ElementCollection
-	@JoinTable(name="LINEAS_PEDIDO", joinColumns = @JoinColumn(name="CODIGO_PEDIDO"))
+	@JoinTable(name="LINEAS_PEDIDO", 
+			   joinColumns = @JoinColumn(name="CODIGO_PEDIDO"))
 	@OrderColumn(name="ORDEN")
 	private List<LineaPedido> lineas;
 	

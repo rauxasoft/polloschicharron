@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -18,6 +19,7 @@ public class Producto {
 	
 	@Id
 	@Column(name="CODIGO")
+	@GeneratedValue(generator = "PRODUCTO_SEQ")
 	private Long id;
 	
 	private String nombre;
@@ -25,7 +27,7 @@ public class Producto {
 	@Temporal(TemporalType.DATE)
 	private Date fechaAlta;
 	
-	private boolean descatalogado;
+	private Boolean descatalogado;
 	
 	@ManyToOne
 	@JoinColumn(name="ID_FAMILIA")
@@ -62,11 +64,11 @@ public class Producto {
 		this.fechaAlta = fechaAlta;
 	}
 
-	public boolean isDescatalogado() {
+	public Boolean isDescatalogado() {
 		return descatalogado;
 	}
 
-	public void setDescatalogado(boolean descatalogado) {
+	public void setDescatalogado(Boolean descatalogado) {
 		this.descatalogado = descatalogado;
 	}
 

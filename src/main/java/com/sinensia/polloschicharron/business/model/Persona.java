@@ -5,6 +5,7 @@ import java.util.Objects;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
@@ -17,6 +18,7 @@ public abstract class Persona {
 
 	@Id
 	@Column(name="CODIGO")
+	@GeneratedValue(generator = "PERSONA_SEQ")
 	private Long id;
 	
 	private String DNI;
