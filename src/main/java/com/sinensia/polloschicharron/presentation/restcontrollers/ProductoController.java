@@ -31,7 +31,11 @@ public class ProductoController {
 		return productoServices.getAll();
 	}
 	
-	// TODO Operaciones CRUD en el controlador de Familia
+	// TODO ESTE GET PRODUCTO By ID
+	
+	// TODO ESTE CREATE PRODUCTO
+	
+	// TODO ESTE UPDATE PRODUCTO
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteProducto(@PathVariable Long id){

@@ -8,6 +8,7 @@ import com.sinensia.polloschicharron.business.model.Establecimiento;
 
 public interface EstablecimientoRepository extends JpaRepository<Establecimiento, String>{
 
-	// TODO Hacer que sea case-insensitive
+	// TODO ESTE (buscar documentacion) Hacer que sea case-insensitive
+	// https://docs.spring.io/spring-data/jpa/docs/1.10.x/reference/pdf/spring-data-jpa-reference.pdf
 	List<Establecimiento> findByDireccionProvincia(String provincia);
 }

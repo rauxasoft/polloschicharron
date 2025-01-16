@@ -24,21 +24,21 @@ public class ProductoServicesImpl implements ProductoServices{
 	// ESTE
 	@Override
 	public Long create(Producto producto) {
-		// TODO Auto-generated method stub
+		// TODO ESTE
 		return null;
 	}
 
 	// ESTE
 	@Override
 	public Optional<Producto> read(Long id) {
-		// TODO Auto-generated method stub
+		// TODO ESTE
 		return Optional.empty();
 	}
 
 	// ESTE
 	@Override
 	public void update(Producto producto) {
-		// TODO Auto-generated method stub
+		// TODO ESTE
 		
 	}
 
@@ -73,9 +73,11 @@ public class ProductoServicesImpl implements ProductoServices{
 		return (int) productoRepository.count();
 	}
 
+	// ESTE (requiere de una consulta customizada en ProductoRepository que se puede resolver
+	// mediante el sistema de nombres de Spring Data (ÚLTIMO)
 	@Override
 	public int getNumeroTotalProductosByFamilia(Familia familia) {
-		// TODO Auto-generated method stub
+		// TODO ESTE (último) getNumeroTotalProductosByFamilia method stub
 		return 0;
 	}
 
