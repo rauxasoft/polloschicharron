@@ -19,8 +19,8 @@ public class EmpleadoServicesImpl implements EmpleadoServices {
 	}
 	
 	@Override
-	public Optional<Empleado> read(String DNI) {
-		return empleadoRepository.findById(DNI);
+	public Optional<Empleado> read(Long id) {
+		return empleadoRepository.findById(id);
 	}
 
 	@Override

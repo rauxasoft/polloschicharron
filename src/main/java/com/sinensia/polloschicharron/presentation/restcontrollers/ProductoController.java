@@ -31,6 +31,8 @@ public class ProductoController {
 		return productoServices.getAll();
 	}
 	
+	// TODO Operaciones CRUD en el controlador de Familia
+	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteProducto(@PathVariable Long id){
 		
@@ -62,10 +64,5 @@ public class ProductoController {
 	public Map<Familia, Integer> getEstadistica(){
 		return productoServices.getEstadisticaNumeroProductosPorFamilia();
 	}
-	
-	
-	// Operaciones CRUD 
-	
-	// "getByFamilia"
 
 }

@@ -21,18 +21,21 @@ public class ProductoServicesImpl implements ProductoServices{
 		this.productoRepository = productoRepository;
 	}
 
+	// ESTE
 	@Override
 	public Long create(Producto producto) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	// ESTE
 	@Override
 	public Optional<Producto> read(Long id) {
 		// TODO Auto-generated method stub
 		return Optional.empty();
 	}
 
+	// ESTE
 	@Override
 	public void update(Producto producto) {
 		// TODO Auto-generated method stub
@@ -105,6 +108,5 @@ public class ProductoServicesImpl implements ProductoServices{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 }

@@ -7,7 +7,7 @@ import com.sinensia.polloschicharron.business.model.Empleado;
 
 public interface EmpleadoServices {
 
-	Optional<Empleado> read(String DNI);
+	Optional<Empleado> read(Long id);
 	
 	List<Empleado> getAll();
 }

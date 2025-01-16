@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.sinensia.polloschicharron.business.model.Empleado;
 
-public interface EmpleadoRepository extends JpaRepository<Empleado, String>{
+public interface EmpleadoRepository extends JpaRepository<Empleado, Long>{
 
 }

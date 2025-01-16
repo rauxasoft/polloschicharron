@@ -43,7 +43,7 @@
 					"response": []
 				},
 				{
-					"name": "GET EMPLEADO BY DNI",
+					"name": "GET EMPLEADO BY ID",
 					"event": [
 						{
 							"listen": "test",
@@ -62,7 +62,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}:{{puerto}}/empleados/34009015K",
+							"raw": "http://{{host}}:{{puerto}}/empleados/11",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
@@ -70,14 +70,14 @@
 							"port": "{{puerto}}",
 							"path": [
 								"empleados",
-								"34009015K"
+								"11"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "GET EMPLEADO BY DNI (inexistente)",
+					"name": "GET EMPLEADO BY ID (inexistente)",
 					"event": [
 						{
 							"listen": "test",
@@ -96,7 +96,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}:{{puerto}}/empleados/11111111R",
+							"raw": "http://{{host}}:{{puerto}}/empleados/6788",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
@@ -104,7 +104,7 @@
 							"port": "{{puerto}}",
 							"path": [
 								"empleados",
-								"11111111R"
+								"6788"
 							]
 						}
 					},
@@ -146,7 +146,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}:{{puerto}}/establecimientos/B27855671",
+							"raw": "http://{{host}}:{{puerto}}/establecimientos/B38983321",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
@@ -154,7 +154,7 @@
 							"port": "{{puerto}}",
 							"path": [
 								"establecimientos",
-								"B27855671"
+								"B38983321"
 							]
 						}
 					},
@@ -215,7 +215,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"Pollos Chicharrón - Vallés Nord (UPDATED)\",\r\n    \"direccion\": {\r\n        \"direccion\": \"c/ Industria, 2\",\r\n        \"poblacion\": \"Sabt Cugat\",\r\n        \"codigoPostal\": \"08112\",\r\n        \"provincia\": \"Barcelona\",\r\n        \"pais\": \"España\"\r\n    },\r\n    \"datosContacto\": {\r\n        \"telefono\": \"+34 932222222\",\r\n        \"movil\": \"+34 620908425\",\r\n        \"email\": \"vallesnord@polloschicharrones.com\"\r\n    },\r\n    \"nif\": \"B27855671\"\r\n}",
+							"raw": "{\r\n    \"nombre\": \"Gran Via 2 (UPDATED)\",\r\n    \"direccion\": {\r\n        \"direccion\": \"Gran Via de Les Corts Catalanes, 345\",\r\n        \"poblacion\": \"Barcelona\",\r\n        \"codigoPostal\": \"08034\",\r\n        \"provincia\": \"Barcelona\",\r\n        \"pais\": \"España\"\r\n    },\r\n    \"datosContacto\": {\r\n        \"telefono\": \"+34 932247078\",\r\n        \"movil\": null,\r\n        \"email\": \"granvia2@pollosfelices.com\"\r\n    },\r\n    \"nif\": \"B38983321\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -290,7 +290,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}:{{puerto}}/familias/56",
+							"raw": "http://{{host}}:{{puerto}}/familias/2",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
@@ -298,7 +298,7 @@
 							"port": "{{puerto}}",
 							"path": [
 								"familias",
-								"56"
+								"2"
 							]
 						}
 					},

@@ -28,13 +28,13 @@ public class EmpleadoController {
 		return empleadoServices.getAll();
 	}
 	
-	@GetMapping("/{dni}")
-	public Empleado getEmpleado(@PathVariable String dni) {
+	@GetMapping("/{id}")
+	public Empleado getEmpleado(@PathVariable Long id) {
 		
-		Optional<Empleado> optional = empleadoServices.read(dni);
+		Optional<Empleado> optional = empleadoServices.read(id);
 		
 		if(optional.isEmpty()) {
-			throw new PresentationException("No existe el empleado con DNI " + dni, HttpStatus.NOT_FOUND);
+			throw new PresentationException("No existe el empleado con ID " + id, HttpStatus.NOT_FOUND);
 		}
 		
 		return optional.get();
