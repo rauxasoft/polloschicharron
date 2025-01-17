@@ -8,6 +8,7 @@ public class ProductoDTO3 {
 	private double precioDescuento;
 	
 	/*
+	 *	// TODO
 	 * 
 	 * Opcional!
 	 * 

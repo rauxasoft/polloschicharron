@@ -2,6 +2,8 @@ package com.sinensia.polloschicharron.business.model.dtos;
 
 public class EmpleadoDTO1 {
 
+	// TODO
+	
 	/*
 	 * 
 	 * Este DTO transporta la siguiente información:
@@ -13,6 +15,7 @@ public class EmpleadoDTO1 {
 	 * 
 	 * 3.- La licencia de manipulador de alimentos
 	 * 
+	 *
 	 * 
 	 */
 	
