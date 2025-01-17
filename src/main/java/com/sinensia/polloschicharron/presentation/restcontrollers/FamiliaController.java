@@ -60,9 +60,11 @@ public class FamiliaController {
 		return ResponseEntity.created(ucb.path("/familias/{id}").build(id)).build();
 	}
 	
-	@PutMapping
+	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void updateFamilia(@RequestBody Familia familia) {
+	public void updateFamilia(@RequestBody Familia familia, @PathVariable Long id) {
+		
+		familia.setId(id);
 		
 		try {
 			familiaServices.update(familia);

@@ -20,7 +20,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.sinensia.polloschicharron.business.model.Familia;
 import com.sinensia.polloschicharron.business.model.Producto;
 import com.sinensia.polloschicharron.business.services.ProductoServices;
-import com.sinensia.polloschicharron.presentation.config.HttpErrorCustomizado;
 import com.sinensia.polloschicharron.presentation.config.PresentationException;
 
 @RestController
@@ -60,13 +59,15 @@ public class ProductoController {
 		} catch(IllegalStateException e) {
 			throw new PresentationException(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
-		
+
 		return ResponseEntity.created(ucb.path("/productos/{id}").build(id)).build();
 	}
 	
-	@PutMapping
+	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void updateProductoa(@RequestBody Producto producto) {
+	public void updateProducto(@RequestBody Producto producto, @PathVariable Long id) {
+		
+		producto.setId(id);
 		
 		try {
 			productoServices.update(producto);
@@ -76,30 +77,14 @@ public class ProductoController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> deleteProducto(@PathVariable Long id){
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void deleteProducto(@PathVariable Long id){
 		
 		try {
 			productoServices.delete(id);
 		} catch(IllegalStateException e) {
-			
-			HttpStatus httpStatus = null;
-			String mensaje = null;
-			
-			if(id == null) {
-				httpStatus = HttpStatus.BAD_REQUEST;
-				mensaje = "La id es null";
-			} else {
-				httpStatus = HttpStatus.NOT_FOUND;
-				mensaje = "No se encuentra el producto con id " + id;
-			}
-			
-			HttpErrorCustomizado httpErrorCustomizado = new HttpErrorCustomizado(mensaje);
-			
-			return new ResponseEntity<>(httpErrorCustomizado, httpStatus);
-
+			throw new PresentationException("El producto con ID [" + id + "] no existe.", HttpStatus.NOT_FOUND);
 		}
-		
-		return ResponseEntity.noContent().build();
 	}
 	
 	@GetMapping("/estadistica")
