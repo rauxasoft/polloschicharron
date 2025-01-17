@@ -116,12 +116,38 @@
 			"name": "Establecimientos",
 			"item": [
 				{
+					"name": "DTOs",
+					"item": [
+						{
+							"name": "DTO1",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{host}}:{{puerto}}/establecimientos/dtos/establecimientoDTO1",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{puerto}}",
+									"path": [
+										"establecimientos",
+										"dtos",
+										"establecimientoDTO1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "GET ALL ESTABLECIMIENTOS",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}:{{puerto}}/establecimientos?provincia=Barcelona",
+							"raw": "http://{{host}}:{{puerto}}/establecimientos?provincia=BARcelona",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
@@ -133,7 +159,7 @@
 							"query": [
 								{
 									"key": "provincia",
-									"value": "Barcelona"
+									"value": "BARcelona"
 								}
 							]
 						}
@@ -359,7 +385,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 2,\r\n    \"nombre\": \"CERVEZAS ACTUALIZADAS\"\r\n}",
+							"raw": "{\r\n    \"nombre\": \"CERVEZAS ACTUALIZADAS\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -367,14 +393,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{host}}:{{puerto}}/familias",
+							"raw": "http://{{host}}:{{puerto}}/familias/2",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{puerto}}",
 							"path": [
-								"familias"
+								"familias",
+								"2"
 							]
 						}
 					},
@@ -386,12 +413,87 @@
 			"name": "Productos",
 			"item": [
 				{
-					"name": "DELETE PRODUCTO",
+					"name": "DTOs",
+					"item": [
+						{
+							"name": "DTO1",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{host}}:{{puerto}}/productos/dtos/productoDTO1",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{puerto}}",
+									"path": [
+										"productos",
+										"dtos",
+										"productoDTO1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DTO2",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{host}}:{{puerto}}/productos/dtos/productoDTO2",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{puerto}}",
+									"path": [
+										"productos",
+										"dtos",
+										"productoDTO2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET ALL PRODUCTOS",
 					"request": {
-						"method": "DELETE",
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}:{{puerto}}/productos/1",
+							"raw": "http://{{host}}:{{puerto}}/productos",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{puerto}}",
+							"path": [
+								"productos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET PRODUCTO BY ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{puerto}}/productos/100",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
@@ -399,7 +501,102 @@
 							"port": "{{puerto}}",
 							"path": [
 								"productos",
-								"1"
+								"100"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREARTE PRODUCTO",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Producto POSTMAN\",\r\n    \"fechaAlta\": \"2017-10-21\",\r\n    \"descatalogado\": false,\r\n    \"familia\": {\r\n        \"id\": 4,\r\n        \"nombre\": \"TAPA\"\r\n    },\r\n    \"precio\": 6.0,\r\n    \"descripcion\": \"Delicioso producto de pruebas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{puerto}}/productos",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{puerto}}",
+							"path": [
+								"productos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE PRODUCTO",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Patatas Bravas (ACTUALIZADAS)\",\r\n    \"fechaAlta\": \"2017-10-21\",\r\n    \"descatalogado\": false,\r\n    \"familia\": {\r\n        \"id\": 4,\r\n        \"nombre\": \"TAPA\"\r\n    },\r\n    \"precio\": 6.0,\r\n    \"descripcion\": \"Deliciosas patatas bravas de verdad\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{puerto}}/productos/100",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{puerto}}",
+							"path": [
+								"productos",
+								"100"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE PRODUCTO",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id\": 100,\r\n        \"nombre\": \"Patatas Bravas (ACTUALIZADAS)\",\r\n        \"fechaAlta\": \"2017-10-21\",\r\n        \"descatalogado\": false,\r\n        \"familia\": {\r\n            \"id\": 4,\r\n            \"nombre\": \"TAPA\"\r\n        },\r\n        \"precio\": 6.0,\r\n        \"descripcion\": \"Deliciosas patatas bravas de verdad\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{puerto}}/productos/103",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{puerto}}",
+							"path": [
+								"productos",
+								"103"
 							]
 						}
 					},

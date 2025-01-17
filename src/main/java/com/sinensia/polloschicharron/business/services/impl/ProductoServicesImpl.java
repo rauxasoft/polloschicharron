@@ -1,5 +1,6 @@
 package com.sinensia.polloschicharron.business.services.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.sinensia.polloschicharron.business.model.Familia;
 import com.sinensia.polloschicharron.business.model.Producto;
+import com.sinensia.polloschicharron.business.model.dtos.ProductoDTO1;
+import com.sinensia.polloschicharron.business.model.dtos.ProductoDTO2;
 import com.sinensia.polloschicharron.business.services.ProductoServices;
 import com.sinensia.polloschicharron.integration.repositories.ProductoRepository;
 
@@ -133,6 +136,41 @@ public class ProductoServicesImpl implements ProductoServices{
 	public Map<Familia, Double> getEstadisticaPrecioMedioProductosPorFamilia() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	// ***********************************
+	//
+	// DTOs
+	//
+	// ***********************************	
+
+	@Override
+	public List<ProductoDTO1> getProductosDTO1() {
+
+		List<Object[]> resultados = productoRepository.findDTO1();
+		
+		List<ProductoDTO1> productos = new ArrayList<>();
+
+		resultados.stream().forEach(fila -> {
+			
+			String nombre = (String)  fila[0];
+			String familia = (String) fila[1];
+			Double precio = (Double)  fila[2];
+			ProductoDTO1 productoDTO1 = new ProductoDTO1();
+			
+			productoDTO1.setNombre(nombre);
+			productoDTO1.setFamilia(familia);
+			productoDTO1.setPrecio(precio);
+			
+			productos.add(productoDTO1);
+		});
+		
+		return productos;
+	}
+
+	@Override
+	public List<ProductoDTO2> getProductosDTO2() {
+		return productoRepository.findDTO2();
 	}
 
 }

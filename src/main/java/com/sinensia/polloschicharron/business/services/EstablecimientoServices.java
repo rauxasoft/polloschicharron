@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.sinensia.polloschicharron.business.model.Establecimiento;
+import com.sinensia.polloschicharron.business.model.dtos.EstablecimientoDTO1;
 
 public interface EstablecimientoServices {
 
@@ -25,5 +26,13 @@ public interface EstablecimientoServices {
 	List<Establecimiento> getAll();
 	
 	List<Establecimiento> getByProvincia(String provincia);
+	
+	// ***********************************
+	//
+	// DTOs
+	//
+	// ***********************************
+	
+	List<EstablecimientoDTO1> getEstablecimientosDTO1();
 	
 }

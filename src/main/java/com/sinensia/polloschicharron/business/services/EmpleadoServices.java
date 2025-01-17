@@ -10,4 +10,5 @@ public interface EmpleadoServices {
 	Optional<Empleado> read(Long id);
 	
 	List<Empleado> getAll();
+		
 }

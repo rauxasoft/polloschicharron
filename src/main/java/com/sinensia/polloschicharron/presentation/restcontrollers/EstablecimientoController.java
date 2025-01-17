@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.sinensia.polloschicharron.business.model.Establecimiento;
+import com.sinensia.polloschicharron.business.model.dtos.EstablecimientoDTO1;
 import com.sinensia.polloschicharron.business.services.EstablecimientoServices;
 import com.sinensia.polloschicharron.presentation.config.PresentationException;
 
@@ -77,6 +78,17 @@ public class EstablecimientoController {
 		} catch(IllegalStateException e) {
 			throw new PresentationException(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}	
+	}
+	
+	// ***********************************
+	//
+	// DTOs
+	//
+	// ***********************************	
+	
+	@GetMapping("/dtos/establecimientoDTO1")
+	public List<EstablecimientoDTO1> getEstablecimientosDTO1(){
+		return establecimientoServices.getEstablecimientosDTO1();
 	}
 	
 }

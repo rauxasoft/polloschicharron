@@ -19,6 +19,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.sinensia.polloschicharron.business.model.Familia;
 import com.sinensia.polloschicharron.business.model.Producto;
+import com.sinensia.polloschicharron.business.model.dtos.ProductoDTO1;
+import com.sinensia.polloschicharron.business.model.dtos.ProductoDTO2;
 import com.sinensia.polloschicharron.business.services.ProductoServices;
 import com.sinensia.polloschicharron.presentation.config.PresentationException;
 
@@ -90,6 +92,22 @@ public class ProductoController {
 	@GetMapping("/estadistica")
 	public Map<Familia, Integer> getEstadistica(){
 		return productoServices.getEstadisticaNumeroProductosPorFamilia();
+	}
+	
+	// ***********************************
+	//
+	// DTOs
+	//
+	// ***********************************	
+	
+	@GetMapping("/dtos/productoDTO1")
+	public List<ProductoDTO1> getProductosDTO1(){
+		return productoServices.getProductosDTO1();
+	}
+	
+	@GetMapping("/dtos/productoDTO2")
+	public List<ProductoDTO2> getProductosDTO2(){
+		return productoServices.getProductosDTO2();
 	}
 
 }

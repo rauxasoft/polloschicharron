@@ -7,6 +7,8 @@ import java.util.Optional;
 
 import com.sinensia.polloschicharron.business.model.Familia;
 import com.sinensia.polloschicharron.business.model.Producto;
+import com.sinensia.polloschicharron.business.model.dtos.ProductoDTO1;
+import com.sinensia.polloschicharron.business.model.dtos.ProductoDTO2;
 
 public interface ProductoServices {
 	
@@ -82,5 +84,15 @@ public interface ProductoServices {
 	Map<Familia, Integer> getEstadisticaNumeroProductosPorFamilia();
 	
 	Map<Familia, Double> getEstadisticaPrecioMedioProductosPorFamilia();
+	
+	// ***********************************
+	//
+	// DTOs
+	//
+	// ***********************************
+	
+	List<ProductoDTO1> getProductosDTO1();
+	
+	List<ProductoDTO2> getProductosDTO2();
 	
 }

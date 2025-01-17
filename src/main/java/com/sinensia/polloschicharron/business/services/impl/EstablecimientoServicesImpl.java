@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.sinensia.polloschicharron.business.model.Establecimiento;
+import com.sinensia.polloschicharron.business.model.dtos.EstablecimientoDTO1;
 import com.sinensia.polloschicharron.business.services.EstablecimientoServices;
 import com.sinensia.polloschicharron.integration.repositories.EstablecimientoRepository;
 
@@ -65,6 +66,17 @@ public class EstablecimientoServicesImpl implements EstablecimientoServices {
 	@Override
 	public List<Establecimiento> getByProvincia(String provincia) {
 		return establecimientoRepository.findByDireccionProvinciaIgnoreCase(provincia);
+	}
+	
+	// ***********************************
+	//
+	// DTOs
+	//
+	// ***********************************	
+
+	@Override
+	public List<EstablecimientoDTO1> getEstablecimientosDTO1() {
+		return establecimientoRepository.findDTO1();
 	}
 	
 }
