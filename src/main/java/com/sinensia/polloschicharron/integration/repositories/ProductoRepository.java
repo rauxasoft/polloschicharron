@@ -46,7 +46,10 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
 	@Query("UPDATE Producto p SET p.precio = p.precio + (p.precio * :porcentaje) / 100 WHERE p.id IN :ids")
 	void incrementarPrecio(double porcentaje, Long[] ids);
 	
-	@Query("SELECT p.familia, COUNT(p) FROM Producto p GROUP BY p.familia")
+	@Query("SELECT f, COUNT(p) FROM Familia f LEFT JOIN Producto p ON p.familia = f GROUP BY f ")
 	List<Object[]> getEstadisticaNumeroProductosPorFamilia();
+	
+	@Query("SELECT f, ROUND(AVG(p.precio), 2) FROM Familia f LEFT JOIN Producto p ON p.familia = f GROUP BY f ")
+	List<Object[]> getEstadisticaPrecioMedioProductosPorFamilia();
 	
 }

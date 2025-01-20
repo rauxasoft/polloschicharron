@@ -2,9 +2,11 @@ package com.sinensia.polloschicharron.business.services.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -125,14 +127,23 @@ public class ProductoServicesImpl implements ProductoServices{
 
 	@Override
 	public Map<Familia, Integer> getEstadisticaNumeroProductosPorFamilia() {
-		// TODO Auto-generated method stub
-		return null;
+	
+		return productoRepository.getEstadisticaNumeroProductosPorFamilia()
+				.stream()
+				.collect(Collectors.toMap(x -> (Familia) x[0], 
+						                  x -> ((Long) x[1]).intValue()));
+		
 	}
 
 	@Override
 	public Map<Familia, Double> getEstadisticaPrecioMedioProductosPorFamilia() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Map<Familia, Double> estadistica = new HashMap<>();
+		
+		productoRepository.getEstadisticaPrecioMedioProductosPorFamilia()
+			.forEach(x -> estadistica.put((Familia) x[0], (Double) x[1]));
+		
+		return estadistica;
 	}
 	
 	// ***********************************

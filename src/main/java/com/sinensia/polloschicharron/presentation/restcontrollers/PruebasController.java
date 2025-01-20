@@ -2,6 +2,7 @@ package com.sinensia.polloschicharron.presentation.restcontrollers;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +35,16 @@ public class PruebasController {
 	
 	@Autowired
 	private EmpleadoRepository empleadoRepository;
+	
+	@GetMapping("/12")
+	public Map<Familia, Double> prueba12(){
+		return productoServices.getEstadisticaPrecioMedioProductosPorFamilia();
+	}
+	
+	@GetMapping("/11")
+	public Map<Familia, Integer> prueba11(){
+		return productoServices.getEstadisticaNumeroProductosPorFamilia();
+	}
 	
 	@GetMapping("/10")
 	public String prueba10(){
