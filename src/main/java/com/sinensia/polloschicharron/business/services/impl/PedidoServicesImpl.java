@@ -9,6 +9,8 @@ import com.sinensia.polloschicharron.business.model.Pedido;
 import com.sinensia.polloschicharron.business.services.PedidoServices;
 import com.sinensia.polloschicharron.integration.repositories.PedidoRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class PedidoServicesImpl implements PedidoServices{
 
@@ -19,23 +21,39 @@ public class PedidoServicesImpl implements PedidoServices{
 	}
 	
 	@Override
+	@Transactional
 	public Long create(Pedido pedido) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		if(pedido.getId() != null) {
+			throw new IllegalStateException("Para crear un pedido el id ha de ser null.");
+		}
+		
+		Pedido createdPedido = pedidoRepository.save(pedido);
+		
+		return createdPedido.getId();
 	}
 
 	@Override
 	public Optional<Pedido> read(Long id) {
-		// TODO Auto-generated method stub
-		return Optional.empty();
+		return pedidoRepository.findById(id);
 	}
 
 	@Override
-	public void update(Pedido producto) {
-		// TODO Auto-generated method stub
+	@Transactional
+	public void update(Pedido pedido) {
+
+		Long id = pedido.getId(); 
+		
+		boolean existe = pedidoRepository.existsById(id);
+		
+		if(!existe) {
+			throw new IllegalStateException("El pedido con ID [" + id + "] no existe.");
+		}
+		
+		pedidoRepository.save(pedido);
 		
 	}
-
+	
 	@Override
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
@@ -44,8 +62,7 @@ public class PedidoServicesImpl implements PedidoServices{
 
 	@Override
 	public List<Pedido> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return pedidoRepository.findAll();
 	}
 
 }

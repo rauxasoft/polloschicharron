@@ -36,6 +36,10 @@ public class Pedido {
 	private Empleado responsable;
 	
 	@ManyToOne
+	@JoinColumn(name="NIF_ESTABLECIMIENTO")
+	private Establecimiento establecimiento;
+	
+	@ManyToOne
 	@JoinColumn(name="CODIGO_CLIENTE")
 	private Cliente cliente;
 	
@@ -77,6 +81,14 @@ public class Pedido {
 
 	public void setResponsable(Empleado responsable) {
 		this.responsable = responsable;
+	}
+	
+	public Establecimiento getEstablecimiento() {
+		return establecimiento;
+	}
+
+	public void setEstablecimiento(Establecimiento establecimiento) {
+		this.establecimiento = establecimiento;
 	}
 
 	public Cliente getCliente() {
