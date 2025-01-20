@@ -12,6 +12,7 @@ import com.sinensia.polloschicharron.business.model.Familia;
 import com.sinensia.polloschicharron.business.model.Producto;
 import com.sinensia.polloschicharron.business.model.dtos.ProductoDTO1;
 import com.sinensia.polloschicharron.business.model.dtos.ProductoDTO2;
+import com.sinensia.polloschicharron.business.model.dtos.ProductoDTO3;
 import com.sinensia.polloschicharron.business.services.ProductoServices;
 import com.sinensia.polloschicharron.integration.repositories.ProductoRepository;
 
@@ -171,6 +172,11 @@ public class ProductoServicesImpl implements ProductoServices{
 	@Override
 	public List<ProductoDTO2> getProductosDTO2() {
 		return productoRepository.findDTO2();
+	}
+
+	@Override
+	public List<ProductoDTO3> getProductosDTO3(double descuento) {
+		return productoRepository.findDTO3(descuento);
 	}
 
 }

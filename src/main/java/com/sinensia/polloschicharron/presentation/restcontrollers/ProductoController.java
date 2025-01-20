@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -21,6 +22,7 @@ import com.sinensia.polloschicharron.business.model.Familia;
 import com.sinensia.polloschicharron.business.model.Producto;
 import com.sinensia.polloschicharron.business.model.dtos.ProductoDTO1;
 import com.sinensia.polloschicharron.business.model.dtos.ProductoDTO2;
+import com.sinensia.polloschicharron.business.model.dtos.ProductoDTO3;
 import com.sinensia.polloschicharron.business.services.ProductoServices;
 import com.sinensia.polloschicharron.presentation.config.PresentationException;
 
@@ -108,6 +110,11 @@ public class ProductoController {
 	@GetMapping("/dtos/productoDTO2")
 	public List<ProductoDTO2> getProductosDTO2(){
 		return productoServices.getProductosDTO2();
+	}
+	
+	@GetMapping("/dtos/productoDTO3")
+	public List<ProductoDTO3> getProductosDTO3(@RequestParam(required=false, defaultValue="0") Double descuento){
+		return productoServices.getProductosDTO3(descuento);
 	}
 
 }

@@ -9,6 +9,7 @@ import com.sinensia.polloschicharron.business.model.Familia;
 import com.sinensia.polloschicharron.business.model.Producto;
 import com.sinensia.polloschicharron.business.model.dtos.ProductoDTO1;
 import com.sinensia.polloschicharron.business.model.dtos.ProductoDTO2;
+import com.sinensia.polloschicharron.business.model.dtos.ProductoDTO3;
 
 public interface ProductoServices {
 	
@@ -94,5 +95,11 @@ public interface ProductoServices {
 	List<ProductoDTO1> getProductosDTO1();
 	
 	List<ProductoDTO2> getProductosDTO2();
+	
+	/**
+	 * Devuelve la lista de produtos en formato ProductoDTO3 con el descuento aplicado
+	 * 
+	 */
+	List<ProductoDTO3> getProductosDTO3(double descuento);
 	
 }

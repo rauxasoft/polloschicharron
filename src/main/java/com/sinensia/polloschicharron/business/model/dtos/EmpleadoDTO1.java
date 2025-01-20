@@ -2,21 +2,26 @@ package com.sinensia.polloschicharron.business.model.dtos;
 
 public class EmpleadoDTO1 {
 
-	// TODO
+	private String nombre;
+	private String apellidos;
+	private String licencia;
 	
-	/*
-	 * 
-	 * Este DTO transporta la siguiente información:
-	 * 
-	 * 
-	 * 1.- El nombre del empleado:  "Pepín"
-	 *  
-	 * 2.- Los apellidos del empleado "Gálvez Ridruejo"
-	 * 
-	 * 3.- La licencia de manipulador de alimentos
-	 * 
-	 *
-	 * 
-	 */
-	
+	public EmpleadoDTO1(String nombre, String apellidos, String licencia) {
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.licencia = licencia;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public String getApellidos() {
+		return apellidos;
+	}
+
+	public String getLicencia() {
+		return licencia;
+	}
+
 }
