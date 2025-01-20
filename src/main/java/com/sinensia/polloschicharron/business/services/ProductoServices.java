@@ -75,12 +75,12 @@ public interface ProductoServices {
 	 * Incrementa el precio de todos los productos que se aportan
 	 * según el porcentaje que se indica.
 	 * 
-	 * (el argumento Long[] indica los ids de los productos) 
+	 * (el argumento ids representa los ids de los productos) 
 	 * 
 	 * Ejemplo: si porcentaje = 20.0 se incrementa el precio un 20%
 	 * 
 	 */
-	void incrementarPrecio(Long[] ids, double porcentaje);
+	void incrementarPrecio(double porcentaje, Long... ids);
 	
 	Map<Familia, Integer> getEstadisticaNumeroProductosPorFamilia();
 	

@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import com.sinensia.polloschicharron.business.model.Familia;
@@ -19,8 +20,6 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
 	
 	List<Producto> findByFamilia(Familia familia);
 		
-	
-	
 	@Query("SELECT UPPER(p.nombre), p.familia.nombre, p.precio FROM Producto p")
 	List<Object[]> findDTO1();
 
@@ -31,4 +30,23 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
 			+ "p.nombre, p.familia.nombre, p.precio, p.precio - (p.precio * :descuento) / 100) "
 			+ "FROM Producto p")
 	List<ProductoDTO3> findDTO3(Double descuento);
+	
+	@Query("SELECT COUNT(p) FROM Producto p WHERE p.familia = :familia")
+	long getNumeroTotalProductosByFamilia(Familia familia);
+	
+	@Modifying
+	@Query("UPDATE Producto p SET p.precio = p.precio + (p.precio * :porcentaje) / 100 WHERE p.familia = :familia")
+	void incrementarPrecio(Familia familia, double porcentaje);
+	
+	@Modifying
+	@Query("UPDATE Producto p SET p.precio = p.precio + (p.precio * :porcentaje) / 100 WHERE p IN :productos")
+	void incrementarPrecio(List<Producto> productos, double porcentaje);
+	
+	@Modifying
+	@Query("UPDATE Producto p SET p.precio = p.precio + (p.precio * :porcentaje) / 100 WHERE p.id IN :ids")
+	void incrementarPrecio(double porcentaje, Long[] ids);
+	
+	@Query("SELECT p.familia, COUNT(p) FROM Producto p GROUP BY p.familia")
+	List<Object[]> getEstadisticaNumeroProductosPorFamilia();
+	
 }

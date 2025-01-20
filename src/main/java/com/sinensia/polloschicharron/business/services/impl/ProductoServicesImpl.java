@@ -101,30 +101,26 @@ public class ProductoServicesImpl implements ProductoServices{
 		return (int) productoRepository.count();
 	}
 
-	// ESTE (requiere de una consulta customizada en ProductoRepository que se puede resolver
-	// mediante el sistema de nombres de Spring Data (ÚLTIMO)
 	@Override
 	public int getNumeroTotalProductosByFamilia(Familia familia) {
-		// TODO ESTE (último) getNumeroTotalProductosByFamilia method stub
-		return 0;
+		return (int) productoRepository.getNumeroTotalProductosByFamilia(familia);
 	}
 
 	@Override
+	@Transactional
 	public void incrementarPrecio(Familia familia, double porcentaje) {
-		// TODO Auto-generated method stub
-		
+		productoRepository.incrementarPrecio(familia, porcentaje);	
 	}
 
 	@Override
+	@Transactional
 	public void incrementarPrecio(List<Producto> productos, double porcentaje) {
-		// TODO Auto-generated method stub
-		
+		productoRepository.incrementarPrecio(productos, porcentaje);
 	}
 
 	@Override
-	public void incrementarPrecio(Long[] ids, double porcentaje) {
-		// TODO Auto-generated method stub
-		
+	public void incrementarPrecio(double porcentaje, Long... ids) {
+		productoRepository.incrementarPrecio(porcentaje, ids);
 	}
 
 	@Override
