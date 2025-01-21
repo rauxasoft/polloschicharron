@@ -12,6 +12,7 @@
 			<ul>
 				<li><a href="./home">Home</a></li>
 				<li><a href="./lista-empleados">Empleados</a></li>
+				<li><a href="./lista-productos">Productos</a></li>
 				<li><a href="./estadisticas-producto">Estadísticas Producto</a></li>
 				<li><a href="">Pedidos</a></li>
 			</ul>

@@ -20,21 +20,25 @@
 			</ul>
 		</nav>
 		<hr>
-		<h2>Listado Empleados</h2>
+		<h2>Listado Productos</h2>
 		<table>
 			<thead>
 				<tr>
-					<th>Nombre Completo</th>
-					<th>Teléfono</th>
-					<th>Email</th>
+					<th>ID</th>
+					<th>Nombre</th>
+					<th>Familia</th>
+					<th>Precio</th>
+					<th>Descatalogado</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="empleado" items="${empleados}">
+				<c:forEach var="producto" items="${productos}">
 				<tr>
-					<td>${empleado.nombreCompleto}</td>
-					<td>${empleado.telefono}</td>
-					<td>${empleado.email}</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
 				</tr>
 				</c:forEach>
 			</tbody>
