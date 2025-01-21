@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeAppController {
 
 	@GetMapping({"/home", "", "/"})
-	public String getHome() {
+	public String getHome() {		
 		return "index";       //     /WEB-INF/vistas/home.jsp   
 	}
 }
