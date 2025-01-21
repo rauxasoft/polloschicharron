@@ -14,7 +14,7 @@ import com.sinensia.polloschicharron.business.services.EmpleadoServices;
 import com.sinensia.polloschicharron.presentation.config.PresentationException;
 
 @RestController
-@RequestMapping("/empleados")
+@RequestMapping("/rest/empleados")
 public class EmpleadoController {
 
 	private EmpleadoServices empleadoServices;

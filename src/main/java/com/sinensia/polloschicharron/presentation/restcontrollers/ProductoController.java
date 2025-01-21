@@ -27,7 +27,7 @@ import com.sinensia.polloschicharron.business.services.ProductoServices;
 import com.sinensia.polloschicharron.presentation.config.PresentationException;
 
 @RestController
-@RequestMapping("/productos")
+@RequestMapping("/rest/productos")
 public class ProductoController {
 	
 	private ProductoServices productoServices;

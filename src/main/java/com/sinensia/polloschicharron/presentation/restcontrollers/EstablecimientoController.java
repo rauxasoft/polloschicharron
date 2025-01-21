@@ -22,7 +22,7 @@ import com.sinensia.polloschicharron.business.services.EstablecimientoServices;
 import com.sinensia.polloschicharron.presentation.config.PresentationException;
 
 @RestController
-@RequestMapping("/establecimientos")
+@RequestMapping("/rest/establecimientos")
 public class EstablecimientoController {
 	
 	private EstablecimientoServices establecimientoServices;

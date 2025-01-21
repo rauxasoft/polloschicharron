@@ -20,7 +20,7 @@ import com.sinensia.polloschicharron.business.services.FamiliaServices;
 import com.sinensia.polloschicharron.presentation.config.PresentationException;
 
 @RestController
-@RequestMapping("/familias")
+@RequestMapping("/rest/familias")
 public class FamiliaController {
 
 	private FamiliaServices familiaServices;

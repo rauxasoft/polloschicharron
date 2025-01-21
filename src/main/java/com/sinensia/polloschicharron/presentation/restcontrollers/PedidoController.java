@@ -20,7 +20,7 @@ import com.sinensia.polloschicharron.business.services.PedidoServices;
 import com.sinensia.polloschicharron.presentation.config.PresentationException;
 
 @RestController
-@RequestMapping("/pedidos")
+@RequestMapping("/rest/pedidos")
 public class PedidoController {
 
 	private PedidoServices pedidoServices;
