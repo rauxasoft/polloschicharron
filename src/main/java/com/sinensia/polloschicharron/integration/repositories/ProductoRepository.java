@@ -3,6 +3,8 @@ package com.sinensia.polloschicharron.integration.repositories;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -51,5 +53,10 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
 	
 	@Query("SELECT f, ROUND(AVG(p.precio), 2) FROM Familia f LEFT JOIN Producto p ON p.familia = f GROUP BY f ")
 	List<Object[]> getEstadisticaPrecioMedioProductosPorFamilia();
+	
+	// Consultas paginadas
+	
+	@Query("SELECT p FROM Producto p ORDER BY p.id")
+	Page<Producto> getPage(Pageable pageable);
 	
 }

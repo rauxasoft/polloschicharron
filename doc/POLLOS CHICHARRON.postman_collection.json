@@ -326,15 +326,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}:{{puerto}}/familias/2",
+							"raw": "http://{{host}}:{{puerto}}/rest/familias/4",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{puerto}}",
 							"path": [
+								"rest",
 								"familias",
-								"2"
+								"4"
 							]
 						}
 					},
@@ -346,13 +347,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}:{{puerto}}/familias/100",
+							"raw": "http://{{host}}:{{puerto}}/rest/familias/100",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{puerto}}",
 							"path": [
+								"rest",
 								"familias",
 								"100"
 							]
@@ -375,13 +377,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{host}}:{{puerto}}/familias",
+							"raw": "http://{{host}}:{{puerto}}/rest/familias",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{puerto}}",
 							"path": [
+								"rest",
 								"familias"
 							]
 						}
@@ -403,13 +406,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{host}}:{{puerto}}/familias/2",
+							"raw": "http://{{host}}:{{puerto}}/rest/familias/2",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{puerto}}",
 							"path": [
+								"rest",
 								"familias",
 								"2"
 							]
@@ -431,13 +435,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://{{host}}:{{puerto}}/productos/dtos/productoDTO1",
+									"raw": "http://{{host}}:{{puerto}}/restr/productos/dtos/productoDTO1",
 									"protocol": "http",
 									"host": [
 										"{{host}}"
 									],
 									"port": "{{puerto}}",
 									"path": [
+										"restr",
 										"productos",
 										"dtos",
 										"productoDTO1"
@@ -455,13 +460,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://{{host}}:{{puerto}}/productos/dtos/productoDTO2",
+									"raw": "http://{{host}}:{{puerto}}/rest/productos/dtos/productoDTO2",
 									"protocol": "http",
 									"host": [
 										"{{host}}"
 									],
 									"port": "{{puerto}}",
 									"path": [
+										"rest",
 										"productos",
 										"dtos",
 										"productoDTO2"
@@ -481,13 +487,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}:{{puerto}}/productos",
+							"raw": "http://{{host}}:{{puerto}}/rest/productos",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{puerto}}",
 							"path": [
+								"rest",
 								"productos"
 							]
 						}
@@ -503,13 +510,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}:{{puerto}}/productos/100",
+							"raw": "http://{{host}}:{{puerto}}/rest/productos/100",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{puerto}}",
 							"path": [
+								"rest",
 								"productos",
 								"100"
 							]
@@ -535,10 +543,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{host}}:{{puerto}}/rest/productos",
+							"raw": "http://10.250.9.11:{{puerto}}/rest/productos",
 							"protocol": "http",
 							"host": [
-								"{{host}}"
+								"10",
+								"250",
+								"9",
+								"11"
 							],
 							"port": "{{puerto}}",
 							"path": [
@@ -567,13 +578,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{host}}:{{puerto}}/productos/100",
+							"raw": "http://{{host}}:{{puerto}}/rest/productos/100",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{puerto}}",
 							"path": [
+								"rest",
 								"productos",
 								"100"
 							]
@@ -599,13 +611,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{host}}:{{puerto}}/productos/103",
+							"raw": "http://{{host}}:{{puerto}}/rest/productos/103",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{puerto}}",
 							"path": [
+								"rest",
 								"productos",
 								"103"
 							]
@@ -627,13 +640,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}:{{puerto}}/pedidos",
+							"raw": "http://{{host}}:{{puerto}}/rest/pedidos",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{puerto}}",
 							"path": [
+								"rest",
 								"pedidos"
 							]
 						}
@@ -646,13 +660,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}:{{puerto}}/pedidos/1000",
+							"raw": "http://{{host}}:{{puerto}}/rest/pedidos/1000",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{puerto}}",
 							"path": [
+								"rest",
 								"pedidos",
 								"1000"
 							]
@@ -670,7 +685,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"fechaHora\": \"2023-04-25T07:01:33.069+00:00\",\r\n    \"responsable\": {\r\n        \"id\": 11\r\n    },\r\n    \"establecimiento\": {\r\n        \"nif\": \"B38983321\"\r\n    },\r\n    \"estado\": \"NUEVO\",\r\n    \"observaciones\": \"Creado desde Postman\",\r\n    \"lineas\": [\r\n        {\r\n            \"producto\": {\r\n                \"id\": 100\r\n            },\r\n            \"precio\": 6.0,\r\n            \"cantidad\": 1\r\n        },\r\n        {\r\n            \"producto\": {\r\n                \"id\": 132\r\n            },\r\n            \"precio\": 4.5,\r\n            \"cantidad\": 4\r\n        },\r\n        {\r\n            \"producto\": {\r\n                \"id\": 133\r\n            },\r\n            \"precio\": 3.8,\r\n            \"cantidad\": 2\r\n        },\r\n        {\r\n            \"producto\": {\r\n                \"id\": 130\r\n            },\r\n            \"precio\": 3.8,\r\n            \"cantidad\": 7\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"fechaHora\": \"2023-04-25T07:01:33.069+00:00\",\r\n    \"empleado\": {\r\n        \"id\": 11\r\n    },\r\n    \"establecimiento\": {\r\n        \"nif\": \"B38983321\"\r\n    },\r\n    \"estado\": \"NUEVO\",\r\n    \"observaciones\": \"Creado desde Postman\",\r\n    \"lineas\": [\r\n        {\r\n            \"producto\": {\r\n                \"id\": 100\r\n            },\r\n            \"precio\": 6.0,\r\n            \"cantidad\": 1\r\n        },\r\n        {\r\n            \"producto\": {\r\n                \"id\": 132\r\n            },\r\n            \"precio\": 4.5,\r\n            \"cantidad\": 4\r\n        },\r\n        {\r\n            \"producto\": {\r\n                \"id\": 133\r\n            },\r\n            \"precio\": 3.8,\r\n            \"cantidad\": 2\r\n        },\r\n        {\r\n            \"producto\": {\r\n                \"id\": 130\r\n            },\r\n            \"precio\": 3.8,\r\n            \"cantidad\": 7\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -678,13 +693,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{host}}:{{puerto}}/pedidos",
+							"raw": "http://{{host}}:{{puerto}}/rest/pedidos",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{puerto}}",
 							"path": [
+								"rest",
 								"pedidos"
 							]
 						}

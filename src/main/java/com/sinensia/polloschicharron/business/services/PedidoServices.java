@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.sinensia.polloschicharron.business.model.Pedido;
+import com.sinensia.polloschicharron.business.model.dtos.PedidoDTO1;
 
 public interface PedidoServices {
 
@@ -28,5 +29,13 @@ public interface PedidoServices {
 	void delete(Long id);
 	
 	List<Pedido> getAll();
+	
+	// ***********************************
+	//
+	// DTOs
+	//
+	// ***********************************
+		
+	List<PedidoDTO1> getPedidosDTO1();
 	
 }

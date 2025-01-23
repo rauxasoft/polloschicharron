@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.sinensia.polloschicharron.business.model.Pedido;
+import com.sinensia.polloschicharron.business.model.dtos.PedidoDTO1;
 import com.sinensia.polloschicharron.business.services.PedidoServices;
 import com.sinensia.polloschicharron.integration.repositories.PedidoRepository;
 
@@ -64,5 +65,16 @@ public class PedidoServicesImpl implements PedidoServices{
 	public List<Pedido> getAll() {
 		return pedidoRepository.findAll();
 	}
-
+	
+	// ***********************************
+	//
+	// DTOs
+	//
+	// ***********************************
+	
+	@Override
+	public List<PedidoDTO1> getPedidosDTO1() {
+		return pedidoRepository.findDTO1();
+	}
+	
 }

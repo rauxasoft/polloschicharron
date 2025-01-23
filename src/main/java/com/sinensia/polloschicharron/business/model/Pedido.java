@@ -33,7 +33,7 @@ public class Pedido {
 	
 	@ManyToOne
 	@JoinColumn(name="CODIGO_EMPLEADO")
-	private Empleado responsable;
+	private Empleado empleado;
 	
 	@ManyToOne
 	@JoinColumn(name="NIF_ESTABLECIMIENTO")
@@ -75,12 +75,12 @@ public class Pedido {
 		this.fechaHora = fechaHora;
 	}
 
-	public Empleado getResponsable() {
-		return responsable;
+	public Empleado getEmpleado() {
+		return empleado;
 	}
 
-	public void setResponsable(Empleado responsable) {
-		this.responsable = responsable;
+	public void setEmpleado(Empleado empleado) {
+		this.empleado = empleado;
 	}
 	
 	public Establecimiento getEstablecimiento() {
@@ -138,12 +138,6 @@ public class Pedido {
 			return false;
 		Pedido other = (Pedido) obj;
 		return Objects.equals(id, other.id);
-	}
-
-	@Override
-	public String toString() {
-		return "Pedido [id=" + id + ", fechaHora=" + fechaHora + ", responsable=" + responsable + ", cliente=" + cliente
-				+ ", estado=" + estado + ", observaciones=" + observaciones + ", lineas=" + lineas + "]";
 	}
 
 }
