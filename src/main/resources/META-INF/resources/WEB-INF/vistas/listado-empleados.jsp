@@ -4,24 +4,13 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
 		<title>Pollos Chicharrón</title>
-		<link rel="stylesheet" href="/css/estilos.css">
+		<jsp:include page="common-in-head.jsp"/>
 	</head>
 	<body>
-		<nav>
-			<h1>Pollos Chicharrón</h1>
-			<ul>
-				<li><a href="./home">Home</a></li>
-				<li><a href="./lista-empleados">Empleados</a></li>
-				<li><a href="./lista-productos">Productos</a></li>
-				<li><a href="./estadisticas-producto">Estadísticas Producto</a></li>
-				<li><a href="">Pedidos</a></li>
-			</ul>
-		</nav>
-		<hr>
+		<jsp:include page="nav.jsp"/>
 		<h2>Listado Empleados</h2>
-		<table>
+		<table class="table">
 			<thead>
 				<tr>
 					<th>Nombre Completo</th>

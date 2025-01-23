@@ -4,41 +4,38 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
 		<title>Pollos Chicharrón</title>
-		<link rel="stylesheet" href="/css/estilos.css">
+		<jsp:include page="common-in-head.jsp"/>
 	</head>
 	<body>
-		<nav>
-			<h1>Pollos Chicharrón</h1>
-			<ul>
-				<li><a href="./home">Home</a></li>
-				<li><a href="./lista-empleados">Empleados</a></li>
-				<li><a href="./lista-productos">Productos</a></li>
-				<li><a href="./estadisticas-producto">Estadísticas Producto</a></li>
-				<li><a href="">Pedidos</a></li>
-			</ul>
-		</nav>
-		<hr>
+		<jsp:include page="nav.jsp"/>
 		<h2>Listado Productos</h2>
-		<table>
+		<table class="table">
 			<thead>
 				<tr>
 					<th>ID</th>
 					<th>Nombre</th>
 					<th>Familia</th>
-					<th>Precio</th>
+					<th style="text-align: right;">Precio</th>
+					<th style="text-align: center;">Fecha de Alta</th>
 					<th>Descatalogado</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="producto" items="${productos}">
 				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td>${producto.id}</td>
+					<td>${producto.nombre}</td>
+					<td>${producto.familia.nombre}</td>
+					<td style="text-align: right;">
+						<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${producto.precio}" />
+					</td>
+					<td style="text-align: center;">
+						<fmt:formatDate pattern="dd/MM/yyyy" value="${producto.fechaAlta}" />
+					</td>
+					<td>
+						<c:if test="${producto.descatalogado}"><span style="color: red;">DESCATALOGADO</span></c:if>
+					</td>
 				</tr>
 				</c:forEach>
 			</tbody>

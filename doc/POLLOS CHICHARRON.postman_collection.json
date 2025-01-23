@@ -29,13 +29,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}:{{puerto}}/empleados",
+							"raw": "http://{{host}}:{{puerto}}/rest/empleados",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{puerto}}",
 							"path": [
+								"rest",
 								"empleados"
 							]
 						}
@@ -62,13 +63,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}:{{puerto}}/empleados/11",
+							"raw": "http://{{host}}:{{puerto}}/rest/empleados/11",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{puerto}}",
 							"path": [
+								"rest",
 								"empleados",
 								"11"
 							]
@@ -96,13 +98,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}:{{puerto}}/empleados/6788",
+							"raw": "http://{{host}}:{{puerto}}/rest/empleados/6788",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{puerto}}",
 							"path": [
+								"rest",
 								"empleados",
 								"6788"
 							]
@@ -124,13 +127,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://{{host}}:{{puerto}}/establecimientos/dtos/establecimientoDTO1",
+									"raw": "http://{{host}}:{{puerto}}/rest/establecimientos/dtos/establecimientoDTO1",
 									"protocol": "http",
 									"host": [
 										"{{host}}"
 									],
 									"port": "{{puerto}}",
 									"path": [
+										"rest",
 										"establecimientos",
 										"dtos",
 										"establecimientoDTO1"
@@ -147,13 +151,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}:{{puerto}}/establecimientos?provincia=BARcelona",
+							"raw": "http://{{host}}:{{puerto}}/rest/establecimientos?provincia=BARcelona",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{puerto}}",
 							"path": [
+								"rest",
 								"establecimientos"
 							],
 							"query": [
@@ -172,13 +177,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}:{{puerto}}/establecimientos/B38983321",
+							"raw": "http://{{host}}:{{puerto}}/rest/establecimientos/B38983321",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{puerto}}",
 							"path": [
+								"rest",
 								"establecimientos",
 								"B38983321"
 							]
@@ -192,13 +198,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}:{{puerto}}/establecimientos/B00000000",
+							"raw": "http://{{host}}:{{puerto}}/rest/establecimientos/B00000000",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{puerto}}",
 							"path": [
+								"rest",
 								"establecimientos",
 								"B00000000"
 							]
@@ -221,13 +228,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{host}}:{{puerto}}/establecimientos",
+							"raw": "http://{{host}}:{{puerto}}/rest/establecimientos",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{puerto}}",
 							"path": [
+								"rest",
 								"establecimientos"
 							]
 						}
@@ -249,13 +257,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{host}}:{{puerto}}/establecimientos",
+							"raw": "http://{{host}}:{{puerto}}/rest/establecimientos",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{puerto}}",
 							"path": [
+								"rest",
 								"establecimientos"
 							]
 						}
@@ -273,13 +282,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}:{{puerto}}/familias",
+							"raw": "http://{{host}}:{{puerto}}/rest/familias",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{puerto}}",
 							"path": [
+								"rest",
 								"familias"
 							]
 						}
@@ -517,7 +527,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"Producto POSTMAN\",\r\n    \"fechaAlta\": \"2017-10-21\",\r\n    \"descatalogado\": false,\r\n    \"familia\": {\r\n        \"id\": 4,\r\n        \"nombre\": \"TAPA\"\r\n    },\r\n    \"precio\": 6.0,\r\n    \"descripcion\": \"Delicioso producto de pruebas\"\r\n}",
+							"raw": "{\r\n    \"nombre\": \"Producto POSTMAN\",\r\n    \"fechaAlta\": \"2017-10-21\",\r\n    \"descatalogado\": false,\r\n    \"familia\": {\r\n        \"id\": 4\r\n    },\r\n    \"precio\": 6.0,\r\n    \"descripcion\": \"Delicioso producto de pruebas\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -525,13 +535,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{host}}:{{puerto}}/productos",
+							"raw": "http://{{host}}:{{puerto}}/rest/productos",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"port": "{{puerto}}",
 							"path": [
+								"rest",
 								"productos"
 							]
 						}

@@ -27,7 +27,7 @@ public class Producto {
 	@Temporal(TemporalType.DATE)
 	private Date fechaAlta;
 	
-	private Boolean descatalogado;
+	private boolean descatalogado;
 	
 	@ManyToOne
 	@JoinColumn(name="ID_FAMILIA")
@@ -64,11 +64,11 @@ public class Producto {
 		this.fechaAlta = fechaAlta;
 	}
 
-	public Boolean isDescatalogado() {
+	public boolean isDescatalogado() {
 		return descatalogado;
 	}
 
-	public void setDescatalogado(Boolean descatalogado) {
+	public void setDescatalogado(boolean descatalogado) {
 		this.descatalogado = descatalogado;
 	}
 
