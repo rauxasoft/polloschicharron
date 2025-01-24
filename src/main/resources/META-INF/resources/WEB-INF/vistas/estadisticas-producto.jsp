@@ -6,8 +6,10 @@
 		<jsp:include page="common-in-head.jsp"/>
 	</head>
 	<body>
-		<jsp:include page="nav.jsp"/>
-		<h2>Estadística de Productos</h2>
-		<p>Número total de productos: ${numeroProductos} </p>
+		<div class="container">
+			<jsp:include page="nav.jsp"/>
+			<h2>Estadística de Productos</h2>
+			<p>Número total de productos: ${numeroProductos}</p>
+		</div>
 	</body>
 </html>

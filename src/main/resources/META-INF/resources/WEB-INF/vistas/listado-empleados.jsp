@@ -8,25 +8,27 @@
 		<jsp:include page="common-in-head.jsp"/>
 	</head>
 	<body>
-		<jsp:include page="nav.jsp"/>
-		<h2>Listado Empleados</h2>
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Nombre Completo</th>
-					<th>Teléfono</th>
-					<th>Email</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="empleado" items="${empleados}">
-				<tr>
-					<td>${empleado.nombreCompleto}</td>
-					<td>${empleado.telefono}</td>
-					<td>${empleado.email}</td>
-				</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+		<div class="container">
+			<jsp:include page="nav.jsp"/>
+			<h2>Listado Empleados</h2>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Nombre Completo</th>
+						<th>Teléfono</th>
+						<th>Email</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="empleado" items="${empleados}">
+					<tr>
+						<td>${empleado.nombreCompleto}</td>
+						<td>${empleado.telefono}</td>
+						<td>${empleado.email}</td>
+					</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
 	</body>
 </html>
