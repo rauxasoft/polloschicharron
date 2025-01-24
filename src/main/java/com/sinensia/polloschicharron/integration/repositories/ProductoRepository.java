@@ -19,7 +19,7 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
 	List<Producto> findByFechaAltaBetweenOrderByFechaAltaDesc(Date desde, Date hasta);
 	
 	List<Producto> findByFamilia(Familia familia);
-		
+	
 	@Query("SELECT UPPER(p.nombre), p.familia.nombre, p.precio FROM Producto p")
 	List<Object[]> findDTO1();
 
@@ -34,21 +34,26 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
 	@Query("SELECT COUNT(p) FROM Producto p WHERE p.familia = :familia")
 	long getNumeroTotalProductosByFamilia(Familia familia);
 	
+	// TODO TEST
 	@Modifying
 	@Query("UPDATE Producto p SET p.precio = p.precio + (p.precio * :porcentaje) / 100 WHERE p.familia = :familia")
 	void incrementarPrecio(Familia familia, double porcentaje);
 	
+	// TODO TEST
 	@Modifying
 	@Query("UPDATE Producto p SET p.precio = p.precio + (p.precio * :porcentaje) / 100 WHERE p IN :productos")
 	void incrementarPrecio(List<Producto> productos, double porcentaje);
 	
+	// TODO TEST
 	@Modifying
 	@Query("UPDATE Producto p SET p.precio = p.precio + (p.precio * :porcentaje) / 100 WHERE p.id IN :ids")
 	void incrementarPrecio(double porcentaje, Long[] ids);
 	
+	// TODO TEST
 	@Query("SELECT f, COUNT(p) FROM Familia f LEFT JOIN Producto p ON p.familia = f GROUP BY f ")
 	List<Object[]> getEstadisticaNumeroProductosPorFamilia();
 	
+	// TODO TEST
 	@Query("SELECT f, ROUND(AVG(p.precio), 2) FROM Familia f LEFT JOIN Producto p ON p.familia = f GROUP BY f ")
 	List<Object[]> getEstadisticaPrecioMedioProductosPorFamilia();
 	
