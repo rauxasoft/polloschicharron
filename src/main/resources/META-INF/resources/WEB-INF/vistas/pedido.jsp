@@ -11,9 +11,9 @@
 	</head>
 </head>
 <body>
-	<div class="container">
+	<div class="container-fluid">
 		<jsp:include page="nav.jsp"/>
-		<h2 style="margin-bottom: 20px;">Pedido</h2>
+		<h3 style="margin-bottom: 20px; margin-top: 20px;">Pedido</h3>
 		
 		<section class="row mb-4">
 			

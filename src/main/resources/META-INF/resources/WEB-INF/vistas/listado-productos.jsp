@@ -8,9 +8,9 @@
 		<jsp:include page="common-in-head.jsp"/>
 	</head>
 	<body>
-		<div class="container">
+		<div class="container-fluid">
 			<jsp:include page="nav.jsp"/>
-			<h2>Listado Productos</h2>
+			<h3 style="margin-top: 15px;">Listado Productos</h3>
 			<table class="table">
 				<thead>
 					<tr>
