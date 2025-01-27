@@ -57,7 +57,7 @@ public class FamiliaController {
 			throw new PresentationException(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		
-		return ResponseEntity.created(ucb.path("/familias/{id}").build(id)).build();
+		return ResponseEntity.created(ucb.path("/rest/familias/{id}").build(id)).build();
 	}
 	
 	@PutMapping("/{id}")
