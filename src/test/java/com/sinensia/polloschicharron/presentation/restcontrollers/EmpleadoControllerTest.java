@@ -1,11 +1,8 @@
 package com.sinensia.polloschicharron.presentation.restcontrollers;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.nio.charset.StandardCharsets;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,26 +10,17 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sinensia.polloschicharron.business.model.Empleado;
 import com.sinensia.polloschicharron.business.services.EmpleadoServices;
 import com.sinensia.polloschicharron.presentation.config.HttpErrorCustomizado;
 
 @WebMvcTest(EmpleadoController.class)
-public class EmpleadoControllerTest {
+public class EmpleadoControllerTest extends AbstractControllerTest{
 
-	@Autowired
-	private MockMvc miniPostman;
-	
-	@Autowired
-	private ObjectMapper mapper; // Para convertir de JSON a Java y de Java a JSON (El JSON es un String)
-	
 	@MockitoBean
 	private EmpleadoServices empleadoServices;
 	
@@ -55,16 +43,13 @@ public class EmpleadoControllerTest {
 		
 		// Act
 		
-		MvcResult respuesta = miniPostman.perform(get("/rest/empleados").contentType("application/json"))
+		MvcResult mvcResult = mockMvc.perform(get("/rest/empleados").contentType("application/json"))
 									.andExpect(status().isOk())
 									.andReturn();
 		
 		// Assert
 		
-		String responseBody = respuesta.getResponse().getContentAsString(StandardCharsets.UTF_8);
-		String empleadosAsJSON = mapper.writeValueAsString(empleados);
-		
-		assertEquals(empleadosAsJSON, responseBody);
+		testResponseBody(mvcResult, empleados);
 			
 	}
 	
@@ -77,16 +62,13 @@ public class EmpleadoControllerTest {
 		
 		// Act
 		
-		MvcResult respuesta = miniPostman.perform(get("/rest/empleados/100").contentType("application/json"))
+		MvcResult mvcResult = mockMvc.perform(get("/rest/empleados/100").contentType("application/json"))
 								.andExpect(status().isOk())
 								.andReturn();
 		
 		// Assert
 		
-		String responseBody = respuesta.getResponse().getContentAsString(StandardCharsets.UTF_8);
-		String empleadoAsJSON = mapper.writeValueAsString(empleado1);
-		
-		assertEquals(empleadoAsJSON, responseBody);
+		testResponseBody(mvcResult, empleado1);
 		
 	}
 	
@@ -95,14 +77,11 @@ public class EmpleadoControllerTest {
 		
 		when(empleadoServices.read(100L)).thenReturn(Optional.empty());
 		
-		MvcResult respuesta = miniPostman.perform(get("/rest/empleados/100").contentType("application/json"))
+		MvcResult mvcResult = mockMvc.perform(get("/rest/empleados/100").contentType("application/json"))
 								.andExpect(status().isNotFound())
 								.andReturn();
-		
-		String responseBody = respuesta.getResponse().getContentAsString(StandardCharsets.UTF_8);
-		String errorJSON = mapper.writeValueAsString(new HttpErrorCustomizado("No existe el empleado con ID 100"));
-		
-		assertEquals(errorJSON, responseBody);
+	
+		testResponseBody(mvcResult, new HttpErrorCustomizado("No existe el empleado con ID 100"));
 		
 	}
 	

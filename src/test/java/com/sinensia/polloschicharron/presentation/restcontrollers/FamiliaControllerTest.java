@@ -1,6 +1,5 @@
 package com.sinensia.polloschicharron.presentation.restcontrollers;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -11,31 +10,22 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.List;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sinensia.polloschicharron.business.model.Familia;
 import com.sinensia.polloschicharron.business.services.FamiliaServices;
 import com.sinensia.polloschicharron.presentation.config.HttpErrorCustomizado;
 
 @WebMvcTest(FamiliaController.class)
-public class FamiliaControllerTest {
+public class FamiliaControllerTest extends AbstractControllerTest{
 
-	@Autowired
-	private MockMvc miniPostman;
-	
-	@Autowired
-	private ObjectMapper mapper; // Para convertir de JSON a Java y de Java a JSON (El JSON es un String)
-	
 	@MockitoBean
 	private FamiliaServices familiaServices;
 	
@@ -54,14 +44,11 @@ public class FamiliaControllerTest {
 		
 		when(familiaServices.getAll()).thenReturn(familias);
 		
-		MvcResult resultado = miniPostman.perform(get("/rest/familias").contentType("application/json"))
+		MvcResult mvcResult = mockMvc.perform(get("/rest/familias").contentType("application/json"))
 									.andExpect(status().isOk())
 									.andReturn();
 		
-		String responseBody = resultado.getResponse().getContentAsString(StandardCharsets.UTF_8);
-		String familiasAsJSON = mapper.writeValueAsString(familias);
-		
-		assertEquals(familiasAsJSON, responseBody);
+		testResponseBody(mvcResult, familias);
 		
 	}
 	
@@ -77,7 +64,7 @@ public class FamiliaControllerTest {
 		
 		when(familiaServices.create(familia)).thenReturn(500L);
 		
-		miniPostman.perform(post("/rest/familias").contentType("application/json").content(requestBody))
+		mockMvc.perform(post("/rest/familias").contentType("application/json").content(requestBody))
 			.andExpect(status().isCreated())
 			.andExpect(header().string("Location", "http://localhost/rest/familias/500"));
 		
@@ -90,14 +77,11 @@ public class FamiliaControllerTest {
 		
 		String requestBody = mapper.writeValueAsString(familia1);
 		
-		MvcResult resultado = miniPostman.perform(post("/rest/familias").contentType("application/json").content(requestBody))
+		MvcResult mvcResult = mockMvc.perform(post("/rest/familias").contentType("application/json").content(requestBody))
 								.andExpect(status().isBadRequest())
 								.andReturn();
-		
-		String responseBody = resultado.getResponse().getContentAsString(StandardCharsets.UTF_8);
-		String errorJSON = mapper.writeValueAsString(new HttpErrorCustomizado("MENSAJE DE TURNO"));
-		
-		assertEquals(errorJSON, responseBody);
+
+		testResponseBody(mvcResult, new HttpErrorCustomizado("MENSAJE DE TURNO"));
 	}
 	
 	@Test
@@ -105,7 +89,7 @@ public class FamiliaControllerTest {
 		
 		String requestBody = mapper.writeValueAsString(familia1);
 		
-		miniPostman.perform(put("/rest/familias/100").contentType("application/json").content(requestBody))
+		mockMvc.perform(put("/rest/familias/100").contentType("application/json").content(requestBody))
 						.andExpect(status().isNoContent());
 		
 		verify(familiaServices, times(1)).update(familia1);
@@ -118,14 +102,11 @@ public class FamiliaControllerTest {
 
 		String requestBody = mapper.writeValueAsString(familia1);
 		
-		MvcResult resultado = miniPostman.perform(put("/rest/familias/100").contentType("application/json").content(requestBody))
+		MvcResult mvcResult = mockMvc.perform(put("/rest/familias/100").contentType("application/json").content(requestBody))
 				 					.andExpect(status().isBadRequest())
 				 					.andReturn();
 				
-		String responseBody = resultado.getResponse().getContentAsString(StandardCharsets.UTF_8);
-		String errorJSON = mapper.writeValueAsString(new HttpErrorCustomizado("La familia 100 no existe"));
-		
-		assertEquals(errorJSON, responseBody);
+		testResponseBody(mvcResult, new HttpErrorCustomizado("La familia 100 no existe"));
 		
 	}
 	
