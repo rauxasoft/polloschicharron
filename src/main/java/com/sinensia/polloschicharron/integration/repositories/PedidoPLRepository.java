@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.sinensia.polloschicharron.business.model.Pedido;
 import com.sinensia.polloschicharron.business.model.dtos.PedidoDTO1;
+import com.sinensia.polloschicharron.integration.model.PedidoPL;
 
-public interface PedidoRepository extends JpaRepository<Pedido, Long> {
+public interface PedidoPLRepository extends JpaRepository<PedidoPL, Long> {
 
 	@Query("SELECT new com.sinensia.polloschicharron.business.model.dtos.PedidoDTO1( "
 		 + "       p.id,                                                             "
@@ -19,7 +19,7 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 		 + "                    ', ',                                                "
 		 + "                    p.empleado.nombre)),                                 "
 		 + "       p.estado)                                                         "
-		 + "FROM   Pedido p                                                          ")
+		 + "FROM   PedidoPL p                                                          ")
 	List<PedidoDTO1> findDTO1();
 
 } 

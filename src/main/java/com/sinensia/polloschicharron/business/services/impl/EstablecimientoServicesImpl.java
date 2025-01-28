@@ -8,17 +8,17 @@ import org.springframework.stereotype.Service;
 import com.sinensia.polloschicharron.business.model.Establecimiento;
 import com.sinensia.polloschicharron.business.model.dtos.EstablecimientoDTO1;
 import com.sinensia.polloschicharron.business.services.EstablecimientoServices;
-import com.sinensia.polloschicharron.integration.repositories.EstablecimientoRepository;
+import com.sinensia.polloschicharron.integration.repositories.EstablecimientoPLRepository;
 
 import jakarta.transaction.Transactional;
 
 @Service
 public class EstablecimientoServicesImpl implements EstablecimientoServices {
 
-	private EstablecimientoRepository establecimientoRepository;
+	private EstablecimientoPLRepository establecimientoPLRepository;
 	
-	public EstablecimientoServicesImpl(EstablecimientoRepository establecimientoRepository) {
-		this.establecimientoRepository = establecimientoRepository;
+	public EstablecimientoServicesImpl(EstablecimientoPLRepository establecimientoRepository) {
+		this.establecimientoPLRepository = establecimientoRepository;
 	}
 	
 	@Override
@@ -27,19 +27,19 @@ public class EstablecimientoServicesImpl implements EstablecimientoServices {
 
 		String NIF = establecimiento.getNIF();
 		
-		boolean existe = establecimientoRepository.existsById(NIF);
+		boolean existe = establecimientoPLRepository.existsById(NIF);
 		
 		if(NIF == null || existe) {
 			throw new IllegalStateException("El NIF [" + NIF + "] no es válido o ya existe.");
 		}
 		
-		establecimientoRepository.save(establecimiento);
+		establecimientoPLRepository.save(establecimiento);
 		
 	}
 
 	@Override
 	public Optional<Establecimiento> read(String NIF) {
-		return establecimientoRepository.findById(NIF);
+		return establecimientoPLRepository.findById(NIF);
 	}
 
 	@Override
@@ -48,24 +48,24 @@ public class EstablecimientoServicesImpl implements EstablecimientoServices {
 
 		String NIF = establecimiento.getNIF();
 		
-		boolean existe = establecimientoRepository.existsById(NIF);
+		boolean existe = establecimientoPLRepository.existsById(NIF);
 		
 		if(NIF == null || !existe) {
 			throw new IllegalStateException("El establecimiento con NIF [" + NIF + "] no existe.");
 		}
 		
-		establecimientoRepository.save(establecimiento);
+		establecimientoPLRepository.save(establecimiento);
 		
 	}
 
 	@Override
 	public List<Establecimiento> getAll() {
-		return establecimientoRepository.findAll();
+		return establecimientoPLRepository.findAll();
 	}
 
 	@Override
 	public List<Establecimiento> getByProvincia(String provincia) {
-		return establecimientoRepository.findByDireccionProvinciaIgnoreCase(provincia);
+		return establecimientoPLRepository.findByDireccionProvinciaIgnoreCase(provincia);
 	}
 	
 	// ***********************************
@@ -76,7 +76,7 @@ public class EstablecimientoServicesImpl implements EstablecimientoServices {
 
 	@Override
 	public List<EstablecimientoDTO1> getEstablecimientosDTO1() {
-		return establecimientoRepository.findDTO1();
+		return establecimientoPLRepository.findDTO1();
 	}
 	
 }

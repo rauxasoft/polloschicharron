@@ -1,10 +1,15 @@
-package com.sinensia.polloschicharron.business.model;
+package com.sinensia.polloschicharron.integration.model;
 
-public class Empleado extends Persona {
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="EMPLEADOS")
+public class EmpleadoPL extends PersonaPL {
 	
 	private String licenciaManipuladorAlimentos;
 
-	public Empleado() {
+	public EmpleadoPL() {
 		
 	}
 
@@ -15,5 +20,6 @@ public class Empleado extends Persona {
 	public void setLicenciaManipuladorAlimentos(String licenciaManipuladorAlimentos) {
 		this.licenciaManipuladorAlimentos = licenciaManipuladorAlimentos;
 	}
-		
+	
+	
 }

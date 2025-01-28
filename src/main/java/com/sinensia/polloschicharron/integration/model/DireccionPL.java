@@ -1,6 +1,9 @@
-package com.sinensia.polloschicharron.business.model;
+package com.sinensia.polloschicharron.integration.model;
 
-public class Direccion {
+import jakarta.persistence.Embeddable;
+
+@Embeddable
+public class DireccionPL {
 
 	private String direccion;
 	private String poblacion;
@@ -8,7 +11,7 @@ public class Direccion {
 	private String provincia;
 	private String pais;
 	
-	public Direccion() {
+	public DireccionPL() {
 		
 	}
 

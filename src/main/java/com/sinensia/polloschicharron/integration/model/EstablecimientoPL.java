@@ -1,15 +1,30 @@
-package com.sinensia.polloschicharron.business.model;
+package com.sinensia.polloschicharron.integration.model;
 
 import java.util.Objects;
 
-public class Establecimiento {
+import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="ESTABLECIMIENTOS")
+public class EstablecimientoPL {
 	
+	@Id
 	private String NIF; // business key
-	private String nombre;
-	private Direccion direccion;
-	private DatosContacto datosContacto;
 	
-	public Establecimiento() {
+	@Column(name="NOMBRE_COMERCIAL")
+	private String nombre;
+	
+	@Embedded
+	private DireccionPL direccion;
+	
+	@Embedded
+	private DatosContactoPL datosContacto;
+	
+	public EstablecimientoPL() {
 		
 	}
 
@@ -29,19 +44,19 @@ public class Establecimiento {
 		this.nombre = nombre;
 	}
 
-	public Direccion getDireccion() {
+	public DireccionPL getDireccion() {
 		return direccion;
 	}
 
-	public void setDireccion(Direccion direccion) {
+	public void setDireccion(DireccionPL direccion) {
 		this.direccion = direccion;
 	}
 
-	public DatosContacto getDatosContacto() {
+	public DatosContactoPL getDatosContacto() {
 		return datosContacto;
 	}
 
-	public void setDatosContacto(DatosContacto datosContacto) {
+	public void setDatosContacto(DatosContactoPL datosContacto) {
 		this.datosContacto = datosContacto;
 	}
 
@@ -58,7 +73,7 @@ public class Establecimiento {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Establecimiento other = (Establecimiento) obj;
+		EstablecimientoPL other = (EstablecimientoPL) obj;
 		return Objects.equals(NIF, other.NIF);
 	}
 

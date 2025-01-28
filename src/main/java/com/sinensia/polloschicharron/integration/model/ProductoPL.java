@@ -1,19 +1,42 @@
-package com.sinensia.polloschicharron.business.model;
+package com.sinensia.polloschicharron.integration.model;
 
 import java.util.Date;
 import java.util.Objects;
 
-public class Producto {
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+
+@Entity
+@Table(name="PRODUCTOS")
+public class ProductoPL {
 	
+	@Id
+	@Column(name="CODIGO")
+	@GeneratedValue(generator = "PRODUCTO_SEQ")
 	private Long id;
+	
 	private String nombre;
+	
+	@Temporal(TemporalType.DATE)
 	private Date fechaAlta;
+	
 	private boolean descatalogado;
-	private Familia familia;
+	
+	@ManyToOne
+	@JoinColumn(name="ID_FAMILIA")
+	private FamiliaPL familia;
+	
 	private Double precio;
 	private String descripcion;
 	
-	public Producto() {
+	public ProductoPL() {
 		
 	}
 
@@ -49,11 +72,11 @@ public class Producto {
 		this.descatalogado = descatalogado;
 	}
 
-	public Familia getFamilia() {
+	public FamiliaPL getFamilia() {
 		return familia;
 	}
 
-	public void setFamilia(Familia familia) {
+	public void setFamilia(FamiliaPL familia) {
 		this.familia = familia;
 	}
 
@@ -86,7 +109,7 @@ public class Producto {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Producto other = (Producto) obj;
+		ProductoPL other = (ProductoPL) obj;
 		return Objects.equals(id, other.id);
 	}
 

@@ -1,20 +1,28 @@
-package com.sinensia.polloschicharron.business.model;
+package com.sinensia.polloschicharron.integration.model;
 
-public class LineaPedido {
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
-	private Producto producto;
+@Embeddable
+public class LineaPedidoPL {
+
+	@ManyToOne
+	@JoinColumn(name="CODIGO_PRODUCTO")
+	private ProductoPL producto;
+	
 	private Double precio;
 	private int cantidad;
 	
-	public LineaPedido() {
+	public LineaPedidoPL() {
 
 	}
 
-	public Producto getProducto() {
+	public ProductoPL getProducto() {
 		return producto;
 	}
 
-	public void setProducto(Producto producto) {
+	public void setProducto(ProductoPL producto) {
 		this.producto = producto;
 	}
 

@@ -1,18 +1,38 @@
-package com.sinensia.polloschicharron.business.model;
+package com.sinensia.polloschicharron.integration.model;
 
 import java.util.Objects;
 
-public abstract class Persona {
+import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name="PERSONAS")
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class PersonaPL {
+
+	@Id
+	@Column(name="CODIGO")
+	@GeneratedValue(generator = "PERSONA_SEQ")
 	private Long id;
+	
 	private String DNI;
 	private String nombre;
 	private String apellido1;
 	private String apellido2;
-	private Direccion direccion;
-	private DatosContacto datosContacto;
 	
-	public Persona() {
+	@Embedded
+	private DireccionPL direccion;
+	
+	@Embedded
+	private DatosContactoPL datosContacto;
+	
+	public PersonaPL() {
 		
 	}
 
@@ -60,19 +80,19 @@ public abstract class Persona {
 		this.apellido2 = apellido2;
 	}
 
-	public Direccion getDireccion() {
+	public DireccionPL getDireccion() {
 		return direccion;
 	}
 
-	public void setDireccion(Direccion direccion) {
+	public void setDireccion(DireccionPL direccion) {
 		this.direccion = direccion;
 	}
 
-	public DatosContacto getDatosContacto() {
+	public DatosContactoPL getDatosContacto() {
 		return datosContacto;
 	}
 
-	public void setDatosContacto(DatosContacto datosContacto) {
+	public void setDatosContacto(DatosContactoPL datosContacto) {
 		this.datosContacto = datosContacto;
 	}
 
@@ -89,7 +109,7 @@ public abstract class Persona {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Persona other = (Persona) obj;
+		PersonaPL other = (PersonaPL) obj;
 		return Objects.equals(DNI, other.DNI);
 	}
 

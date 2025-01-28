@@ -8,17 +8,17 @@ import org.springframework.stereotype.Service;
 import com.sinensia.polloschicharron.business.model.Pedido;
 import com.sinensia.polloschicharron.business.model.dtos.PedidoDTO1;
 import com.sinensia.polloschicharron.business.services.PedidoServices;
-import com.sinensia.polloschicharron.integration.repositories.PedidoRepository;
+import com.sinensia.polloschicharron.integration.repositories.PedidoPLRepository;
 
 import jakarta.transaction.Transactional;
 
 @Service
 public class PedidoServicesImpl implements PedidoServices{
 
-	private PedidoRepository pedidoRepository;
+	private PedidoPLRepository pedidoPLRepository;
 	
-	public PedidoServicesImpl(PedidoRepository pedidoRepository) {
-		this.pedidoRepository = pedidoRepository;
+	public PedidoServicesImpl(PedidoPLRepository pedidoRepository) {
+		this.pedidoPLRepository = pedidoRepository;
 	}
 	
 	@Override
@@ -29,14 +29,14 @@ public class PedidoServicesImpl implements PedidoServices{
 			throw new IllegalStateException("Para crear un pedido el id ha de ser null.");
 		}
 		
-		Pedido createdPedido = pedidoRepository.save(pedido);
+		Pedido createdPedido = pedidoPLRepository.save(pedido);
 		
 		return createdPedido.getId();
 	}
 
 	@Override
 	public Optional<Pedido> read(Long id) {
-		return pedidoRepository.findById(id);
+		return pedidoPLRepository.findById(id);
 	}
 
 	@Override
@@ -45,13 +45,13 @@ public class PedidoServicesImpl implements PedidoServices{
 
 		Long id = pedido.getId(); 
 		
-		boolean existe = pedidoRepository.existsById(id);
+		boolean existe = pedidoPLRepository.existsById(id);
 		
 		if(!existe) {
 			throw new IllegalStateException("El pedido con ID [" + id + "] no existe.");
 		}
 		
-		pedidoRepository.save(pedido);
+		pedidoPLRepository.save(pedido);
 		
 	}
 	
@@ -63,7 +63,7 @@ public class PedidoServicesImpl implements PedidoServices{
 
 	@Override
 	public List<Pedido> getAll() {
-		return pedidoRepository.findAll();
+		return pedidoPLRepository.findAll();
 	}
 	
 	// ***********************************

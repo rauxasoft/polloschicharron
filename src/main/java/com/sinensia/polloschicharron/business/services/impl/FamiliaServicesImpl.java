@@ -3,21 +3,25 @@ package com.sinensia.polloschicharron.business.services.impl;
 import java.util.List;
 import java.util.Optional;
 
+import org.dozer.DozerBeanMapper;
 import org.springframework.stereotype.Service;
 
 import com.sinensia.polloschicharron.business.model.Familia;
 import com.sinensia.polloschicharron.business.services.FamiliaServices;
-import com.sinensia.polloschicharron.integration.repositories.FamiliaRepository;
+import com.sinensia.polloschicharron.integration.model.FamiliaPL;
+import com.sinensia.polloschicharron.integration.repositories.FamiliaPLRepository;
 
 import jakarta.transaction.Transactional;
 
 @Service
 public class FamiliaServicesImpl implements FamiliaServices {
 
-	private FamiliaRepository familiaRepository;
+	private FamiliaPLRepository familiaPLRepository;
+	private DozerBeanMapper mapper;
 	
-	public FamiliaServicesImpl(FamiliaRepository familiaRepository) {
-		this.familiaRepository = familiaRepository;
+	public FamiliaServicesImpl(FamiliaPLRepository familiaRepository, DozerBeanMapper mapper) {
+		this.familiaPLRepository = familiaRepository;
+		this.mapper = mapper;
 	}
 	
 	@Override
@@ -28,14 +32,19 @@ public class FamiliaServicesImpl implements FamiliaServices {
 			throw new IllegalStateException("Para crear una familia el id ha de ser null.");
 		}
 		
-		Familia createdFamilia = familiaRepository.save(familia);
+		FamiliaPL familiaPL = mapper.map(familia, FamiliaPL.class);
 		
-		return createdFamilia.getId();
+		FamiliaPL createdFamiliaPL = familiaPLRepository.save(familiaPL);
+		
+		return createdFamiliaPL.getId();
 	}
 	
 	@Override
 	public Optional<Familia> read(Long id) {
-		return familiaRepository.findById(id);
+		
+		Optional<FamiliaPL> optionalPL = familiaPLRepository.findById(id);
+		
+		return optionalPL.isEmpty() ? Optional.empty() : Optional.of(mapper.map(optionalPL.get(), Familia.class));
 	}
 
 	@Override
@@ -44,19 +53,22 @@ public class FamiliaServicesImpl implements FamiliaServices {
 
 		Long id = familia.getId(); 
 		
-		boolean existe = familiaRepository.existsById(id);
+		boolean existe = familiaPLRepository.existsById(id);
 		
 		if(!existe) {
 			throw new IllegalStateException("La familia con ID [" + id + "] no existe.");
 		}
 		
-		familiaRepository.save(familia);
+		familiaPLRepository.save(mapper.map(familia, FamiliaPL.class));
 		
 	}
 
 	@Override
 	public List<Familia> getAll() {
-		return familiaRepository.findAll();
+		
+		return familiaPLRepository.findAll().stream()
+				.map(x -> mapper.map(x, Familia.class))
+				.toList();
 	}
 	
 }

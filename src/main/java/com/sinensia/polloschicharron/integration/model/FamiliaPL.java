@@ -1,13 +1,23 @@
-package com.sinensia.polloschicharron.business.model;
+package com.sinensia.polloschicharron.integration.model;
 
 import java.util.Objects;
 
-public class Familia {
-	
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="FAMILIAS")
+public class FamiliaPL {
+
+	@Id
+	@GeneratedValue(generator = "FAMILIA_SEQ")
 	private Long id;
+	
 	private String nombre;
 	
-	public Familia() {
+	public FamiliaPL() {
 		
 	}
 
@@ -40,7 +50,7 @@ public class Familia {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Familia other = (Familia) obj;
+		FamiliaPL other = (FamiliaPL) obj;
 		return Objects.equals(id, other.id);
 	}
 

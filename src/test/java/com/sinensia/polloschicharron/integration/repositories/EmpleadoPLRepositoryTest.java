@@ -14,15 +14,15 @@ import com.sinensia.polloschicharron.business.model.dtos.EmpleadoDTO2;
 
 @DataJpaTest
 @Sql(scripts={"classpath:data/schema_test.sql","classpath:data/data_test.sql"})
-public class EmpleadoRepositoryTest {
+public class EmpleadoPLRepositoryTest {
 	
 	@Autowired
-	private EmpleadoRepository empleadoRepository;
+	private EmpleadoPLRepository empleadoPLRepository;
 	
 	@Test
 	void findDTO1Test() {
 		
-		List<EmpleadoDTO1> empleados = empleadoRepository.findDTO1();
+		List<EmpleadoDTO1> empleados = empleadoPLRepository.findDTO1();
 		
 		assertEquals(4, empleados.size());
 	
@@ -38,7 +38,7 @@ public class EmpleadoRepositoryTest {
 	@Test
 	void findDTO2Test() {
 		
-		List<EmpleadoDTO2> empleados = empleadoRepository.findDTO2();
+		List<EmpleadoDTO2> empleados = empleadoPLRepository.findDTO2();
 		
 		assertEquals(4, empleados.size());
 	

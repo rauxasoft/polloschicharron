@@ -1,14 +1,17 @@
-package com.sinensia.polloschicharron.business.model;
+package com.sinensia.polloschicharron.integration.model;
 
 import java.util.Objects;
 
-public class DatosContacto {
+import jakarta.persistence.Embeddable;
+
+@Embeddable
+public class DatosContactoPL {
 
 	private String telefono;
 	private String movil;
 	private String email;
 	
-	public DatosContacto() {
+	public DatosContactoPL() {
 		
 	}
 
@@ -49,7 +52,7 @@ public class DatosContacto {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		DatosContacto other = (DatosContacto) obj;
+		DatosContactoPL other = (DatosContactoPL) obj;
 		return Objects.equals(email, other.email) && Objects.equals(movil, other.movil)
 				&& Objects.equals(telefono, other.telefono);
 	}
