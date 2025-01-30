@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.dozer.DozerBeanMapper;
 import org.springframework.stereotype.Service;
 
 import com.sinensia.polloschicharron.business.model.Familia;
@@ -16,6 +17,8 @@ import com.sinensia.polloschicharron.business.model.dtos.ProductoDTO1;
 import com.sinensia.polloschicharron.business.model.dtos.ProductoDTO2;
 import com.sinensia.polloschicharron.business.model.dtos.ProductoDTO3;
 import com.sinensia.polloschicharron.business.services.ProductoServices;
+import com.sinensia.polloschicharron.integration.model.FamiliaPL;
+import com.sinensia.polloschicharron.integration.model.ProductoPL;
 import com.sinensia.polloschicharron.integration.repositories.ProductoPLRepository;
 
 import jakarta.transaction.Transactional;
@@ -24,9 +27,11 @@ import jakarta.transaction.Transactional;
 public class ProductoServicesImpl implements ProductoServices{
 
 	private final ProductoPLRepository productoPLRepository;
+	private DozerBeanMapper mapper;
 	
-	public ProductoServicesImpl(ProductoPLRepository productoRepository) {
+	public ProductoServicesImpl(ProductoPLRepository productoRepository, DozerBeanMapper mapper) {
 		this.productoPLRepository = productoRepository;
+		this.mapper = mapper;
 	}
 
 	@Override
@@ -37,14 +42,18 @@ public class ProductoServicesImpl implements ProductoServices{
 			throw new IllegalStateException("Para crear un producto el id ha de ser null.");
 		}
 		
-		Producto createdProducto = productoPLRepository.save(producto);
+		ProductoPL productoPL = mapper.map(producto, ProductoPL.class);
 		
-		return createdProducto.getId();
+		ProductoPL createdProductoPL = productoPLRepository.save(productoPL);
+		
+		return createdProductoPL.getId();
 	}
 
 	@Override
 	public Optional<Producto> read(Long id) {
-		return productoPLRepository.findById(id);
+		Optional<ProductoPL> optionalPL = productoPLRepository.findById(id);
+		
+		return optionalPL.isEmpty() ? Optional.empty() : Optional.of(mapper.map(optionalPL.get(), Producto.class));
 	}
 
 	@Override
@@ -59,7 +68,7 @@ public class ProductoServicesImpl implements ProductoServices{
 			throw new IllegalStateException("El producto con ID [" + id + "] no existe.");
 		}
 		
-		productoPLRepository.save(producto);
+		productoPLRepository.save(mapper.map(producto, ProductoPL.class));
 		
 	}
 
@@ -73,29 +82,37 @@ public class ProductoServicesImpl implements ProductoServices{
 			throw new IllegalStateException("El producto con ID [" + id + "] no existe.");	
 		}
 		
-		Optional<Producto> optional = productoPLRepository.findById(id);
-		optional.get().setDescatalogado(true);
+		Optional<ProductoPL> optionalPL = productoPLRepository.findById(id);
+		optionalPL.get().setDescatalogado(true);
 		
 	}
 
 	@Override
 	public List<Producto> getAll() {
-		return productoPLRepository.findAll();
+		return productoPLRepository.findAll().stream()
+				.map(x -> mapper.map(x, Producto.class))
+				.toList();
 	}
 
 	@Override
 	public List<Producto> getBetweenPriceRange(double min, double max) {
-		return productoPLRepository.findByPrecioBetweenOrderByPrecioDesc(min, max);
+		return productoPLRepository.findByPrecioBetweenOrderByPrecioDesc(min, max).stream()
+				.map(x -> mapper.map(x, Producto.class))
+				.toList();
 	}
 
 	@Override
 	public List<Producto> getBetweenFechaAlta(Date desde, Date hasta) {
-		return productoPLRepository.findByFechaAltaBetweenOrderByFechaAltaDesc(desde, hasta);
+		return productoPLRepository.findByFechaAltaBetweenOrderByFechaAltaDesc(desde, hasta).stream()
+				.map(x -> mapper.map(x, Producto.class))
+				.toList();
 	}
 
 	@Override
 	public List<Producto> getByFamilia(Familia familia) {
-		return productoPLRepository.findByFamilia(familia);
+		return productoPLRepository.findByFamilia(mapper.map(familia, FamiliaPL.class)).stream()
+				.map(x -> mapper.map(x, Producto.class))
+				.toList();
 	}
 
 	@Override
@@ -105,19 +122,20 @@ public class ProductoServicesImpl implements ProductoServices{
 
 	@Override
 	public int getNumeroTotalProductosByFamilia(Familia familia) {
-		return (int) productoPLRepository.getNumeroTotalProductosByFamilia(familia);
+		return (int) productoPLRepository.getNumeroTotalProductosByFamilia(mapper.map(familia, FamiliaPL.class));
 	}
 
 	@Override
 	@Transactional
 	public void incrementarPrecio(Familia familia, double porcentaje) {
-		productoPLRepository.incrementarPrecio(familia, porcentaje);	
+		productoPLRepository.incrementarPrecio(mapper.map(familia, FamiliaPL.class), porcentaje);	
 	}
 
 	@Override
 	@Transactional
 	public void incrementarPrecio(List<Producto> productos, double porcentaje) {
-		productoPLRepository.incrementarPrecio(productos, porcentaje);
+		productoPLRepository.incrementarPrecio(productos.stream()
+				.map(x -> mapper.map(x, ProductoPL.class)).toList(), porcentaje);
 	}
 
 	@Override
