@@ -2,9 +2,6 @@ package com.sinensia.polloschicharron.business.model.dtos;
 
 import java.util.Date;
 
-import com.sinensia.polloschicharron.business.model.EstadoPedido;
-import com.sinensia.polloschicharron.integration.model.EstadoPedidoPL;
-
 public class PedidoDTO1 {
 	
 	private Long id;
@@ -13,14 +10,12 @@ public class PedidoDTO1 {
 	private String empleado;        // nombre completo en formato "GALVEZ RIDRUEJO, PEPÍN"
 	private String estado;          // en forma de String
 
-	// TODO OJO QUÉ HACER CON PL
-	
-	public PedidoDTO1(Long id, Date fechaHora, String establecimiento, String empleado, EstadoPedidoPL estadoPedido) {
+	public PedidoDTO1(Long id, Date fechaHora, String establecimiento, String empleado, String estadoPedido) {
 		this.id = id;
 		this.fechaHora = fechaHora;
 		this.establecimiento = establecimiento;
 		this.empleado = empleado;
-		this.estado = estadoPedido.toString();
+		this.estado = estadoPedido;
 	}
 
 	public Long getId() {
