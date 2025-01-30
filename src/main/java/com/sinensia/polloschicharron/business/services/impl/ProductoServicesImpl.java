@@ -28,8 +28,8 @@ public class ProductoServicesImpl implements ProductoServices{
 
 	private final ProductoPLRepository productoPLRepository;
 	private DozerBeanMapper mapper;
-
-	public ProductoServicesImpl(ProductoPLRepository productoRepository, DozerBeanMapper mapper ) {
+  
+	public ProductoServicesImpl(ProductoPLRepository productoRepository, DozerBeanMapper mapper) {
 		this.productoPLRepository = productoRepository;
 		this.mapper = mapper;
 	}
@@ -43,17 +43,16 @@ public class ProductoServicesImpl implements ProductoServices{
 		}
 			
 		ProductoPL productoPL = mapper.map(producto, ProductoPL.class);
-		
 		ProductoPL createdProductoPL = productoPLRepository.save(productoPL);
-		
+    
 		return createdProductoPL.getId();
 	}
 
 	@Override
 	public Optional<Producto> read(Long id) {
-		
-		Optional<ProductoPL> optionalPL = productoPLRepository.findById(id);
 
+		Optional<ProductoPL> optionalPL = productoPLRepository.findById(id);
+	
 		return optionalPL.isEmpty() ? Optional.empty() : Optional.of(mapper.map(optionalPL.get(), Producto.class));
 	}
 
@@ -82,15 +81,15 @@ public class ProductoServicesImpl implements ProductoServices{
 		if(!existe) {
 			throw new IllegalStateException("El producto con ID [" + id + "] no existe.");	
 		}
-		
-		Optional<ProductoPL> optional = productoPLRepository.findById(id);
-		optional.get().setDescatalogado(true);
-		
+    
+		Optional<ProductoPL> optionalPL = productoPLRepository.findById(id);
+		optionalPL.get().setDescatalogado(true);
+
 	}
 
 	@Override
 	public List<Producto> getAll() {
-		return convertProductosPLToProductos(productoPLRepository.findAll());
+	  return convertProductosPLToProductos(productoPLRepository.findAll());
 	}
 
 	@Override
@@ -105,7 +104,6 @@ public class ProductoServicesImpl implements ProductoServices{
 
 	@Override
 	public List<Producto> getByFamilia(Familia familia) {
-		
 		FamiliaPL familiaPL = mapper.map(familia, FamiliaPL.class);
 		return convertProductosPLToProductos(productoPLRepository.findByFamilia(familiaPL));
 	}
@@ -117,25 +115,20 @@ public class ProductoServicesImpl implements ProductoServices{
 
 	@Override
 	public int getNumeroTotalProductosByFamilia(Familia familia) {
-		
 		FamiliaPL familiaPL = mapper.map(familia, FamiliaPL.class);
-
 		return (int) productoPLRepository.getNumeroTotalProductosByFamilia(familiaPL);
 	}
 
 	@Override
 	@Transactional
 	public void incrementarPrecio(Familia familia, double porcentaje) {
-		
 		FamiliaPL familiaPL = mapper.map(familia, FamiliaPL.class);
-
 		productoPLRepository.incrementarPrecio(familiaPL, porcentaje);	
 	}
 
 	@Override
 	@Transactional
 	public void incrementarPrecio(List<Producto> productos, double porcentaje) {
-		
 		productoPLRepository.incrementarPrecio(mapper.map(productos, FamiliaPL.class), porcentaje);
 	}
 

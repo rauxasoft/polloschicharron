@@ -3,11 +3,13 @@ package com.sinensia.polloschicharron.business.services.impl;
 import java.util.List;
 import java.util.Optional;
 
+import org.dozer.DozerBeanMapper;
 import org.springframework.stereotype.Service;
 
 import com.sinensia.polloschicharron.business.model.Pedido;
 import com.sinensia.polloschicharron.business.model.dtos.PedidoDTO1;
 import com.sinensia.polloschicharron.business.services.PedidoServices;
+import com.sinensia.polloschicharron.integration.model.PedidoPL;
 import com.sinensia.polloschicharron.integration.repositories.PedidoPLRepository;
 
 import jakarta.transaction.Transactional;
@@ -16,9 +18,11 @@ import jakarta.transaction.Transactional;
 public class PedidoServicesImpl implements PedidoServices{
 
 	private PedidoPLRepository pedidoPLRepository;
+	private DozerBeanMapper mapper;
 	
-	public PedidoServicesImpl(PedidoPLRepository pedidoRepository) {
+	public PedidoServicesImpl(PedidoPLRepository pedidoRepository, DozerBeanMapper mapper) {
 		this.pedidoPLRepository = pedidoRepository;
+		this.mapper = mapper;
 	}
 	
 	@Override
@@ -27,16 +31,20 @@ public class PedidoServicesImpl implements PedidoServices{
 		
 		if(pedido.getId() != null) {
 			throw new IllegalStateException("Para crear un pedido el id ha de ser null.");
-		}
+		}	
 		
-		Pedido createdPedido = pedidoPLRepository.save(pedido);
+		PedidoPL pedidoPL = mapper.map(pedido, PedidoPL.class);
+		PedidoPL createdPedidoPL = pedidoPLRepository.save(pedidoPL);
 		
-		return createdPedido.getId();
+		return createdPedidoPL.getId();
 	}
 
 	@Override
 	public Optional<Pedido> read(Long id) {
-		return pedidoPLRepository.findById(id);
+		
+		Optional<PedidoPL> optionalPL = pedidoPLRepository.findById(id);
+		
+		return optionalPL.isEmpty() ? Optional.empty() : Optional.of(mapper.map(optionalPL.get(), Pedido.class));
 	}
 
 	@Override
@@ -51,7 +59,7 @@ public class PedidoServicesImpl implements PedidoServices{
 			throw new IllegalStateException("El pedido con ID [" + id + "] no existe.");
 		}
 		
-		pedidoPLRepository.save(pedido);
+		pedidoPLRepository.save(mapper.map(pedido, PedidoPL.class));
 		
 	}
 	
@@ -63,7 +71,9 @@ public class PedidoServicesImpl implements PedidoServices{
 
 	@Override
 	public List<Pedido> getAll() {
-		return pedidoPLRepository.findAll();
+		return pedidoPLRepository.findAll().stream()
+				.map(x -> mapper.map(x, Pedido.class))
+				.toList();
 	}
 	
 	// ***********************************
@@ -74,7 +84,7 @@ public class PedidoServicesImpl implements PedidoServices{
 	
 	@Override
 	public List<PedidoDTO1> getPedidosDTO1() {
-		return pedidoRepository.findDTO1();
+		return pedidoPLRepository.findDTO1();
 	}
 	
 }
