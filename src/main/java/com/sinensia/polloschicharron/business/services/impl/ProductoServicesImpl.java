@@ -28,7 +28,7 @@ public class ProductoServicesImpl implements ProductoServices{
 
 	private final ProductoPLRepository productoPLRepository;
 	private DozerBeanMapper mapper;
-	
+  
 	public ProductoServicesImpl(ProductoPLRepository productoRepository, DozerBeanMapper mapper) {
 		this.productoPLRepository = productoRepository;
 		this.mapper = mapper;
@@ -41,18 +41,18 @@ public class ProductoServicesImpl implements ProductoServices{
 		if(producto.getId() != null) {
 			throw new IllegalStateException("Para crear un producto el id ha de ser null.");
 		}
-		
+			
 		ProductoPL productoPL = mapper.map(producto, ProductoPL.class);
-		
 		ProductoPL createdProductoPL = productoPLRepository.save(productoPL);
-		
+    
 		return createdProductoPL.getId();
 	}
 
 	@Override
 	public Optional<Producto> read(Long id) {
+
 		Optional<ProductoPL> optionalPL = productoPLRepository.findById(id);
-		
+	
 		return optionalPL.isEmpty() ? Optional.empty() : Optional.of(mapper.map(optionalPL.get(), Producto.class));
 	}
 
@@ -81,38 +81,31 @@ public class ProductoServicesImpl implements ProductoServices{
 		if(!existe) {
 			throw new IllegalStateException("El producto con ID [" + id + "] no existe.");	
 		}
-		
+    
 		Optional<ProductoPL> optionalPL = productoPLRepository.findById(id);
 		optionalPL.get().setDescatalogado(true);
-		
+
 	}
 
 	@Override
 	public List<Producto> getAll() {
-		return productoPLRepository.findAll().stream()
-				.map(x -> mapper.map(x, Producto.class))
-				.toList();
+	  return convertProductosPLToProductos(productoPLRepository.findAll());
 	}
 
 	@Override
 	public List<Producto> getBetweenPriceRange(double min, double max) {
-		return productoPLRepository.findByPrecioBetweenOrderByPrecioDesc(min, max).stream()
-				.map(x -> mapper.map(x, Producto.class))
-				.toList();
+		return convertProductosPLToProductos(productoPLRepository.findByPrecioBetweenOrderByPrecioDesc(min, max));
 	}
 
 	@Override
 	public List<Producto> getBetweenFechaAlta(Date desde, Date hasta) {
-		return productoPLRepository.findByFechaAltaBetweenOrderByFechaAltaDesc(desde, hasta).stream()
-				.map(x -> mapper.map(x, Producto.class))
-				.toList();
+		return convertProductosPLToProductos(productoPLRepository.findByFechaAltaBetweenOrderByFechaAltaDesc(desde, hasta));
 	}
 
 	@Override
 	public List<Producto> getByFamilia(Familia familia) {
-		return productoPLRepository.findByFamilia(mapper.map(familia, FamiliaPL.class)).stream()
-				.map(x -> mapper.map(x, Producto.class))
-				.toList();
+		FamiliaPL familiaPL = mapper.map(familia, FamiliaPL.class);
+		return convertProductosPLToProductos(productoPLRepository.findByFamilia(familiaPL));
 	}
 
 	@Override
@@ -122,20 +115,21 @@ public class ProductoServicesImpl implements ProductoServices{
 
 	@Override
 	public int getNumeroTotalProductosByFamilia(Familia familia) {
-		return (int) productoPLRepository.getNumeroTotalProductosByFamilia(mapper.map(familia, FamiliaPL.class));
+		FamiliaPL familiaPL = mapper.map(familia, FamiliaPL.class);
+		return (int) productoPLRepository.getNumeroTotalProductosByFamilia(familiaPL);
 	}
 
 	@Override
 	@Transactional
 	public void incrementarPrecio(Familia familia, double porcentaje) {
-		productoPLRepository.incrementarPrecio(mapper.map(familia, FamiliaPL.class), porcentaje);	
+		FamiliaPL familiaPL = mapper.map(familia, FamiliaPL.class);
+		productoPLRepository.incrementarPrecio(familiaPL, porcentaje);	
 	}
 
 	@Override
 	@Transactional
 	public void incrementarPrecio(List<Producto> productos, double porcentaje) {
-		productoPLRepository.incrementarPrecio(productos.stream()
-				.map(x -> mapper.map(x, ProductoPL.class)).toList(), porcentaje);
+		productoPLRepository.incrementarPrecio(mapper.map(productos, FamiliaPL.class), porcentaje);
 	}
 
 	@Override
@@ -202,6 +196,20 @@ public class ProductoServicesImpl implements ProductoServices{
 	@Override
 	public List<ProductoDTO3> getProductosDTO3(double descuento) {
 		return productoPLRepository.findDTO3(descuento);
+	}
+	
+
+	// ********************************************
+	//
+	// Private Methods
+	//
+	// ********************************************
+	
+	private List<Producto> convertProductosPLToProductos(List<ProductoPL> productosPL){
+		
+		return productosPL.stream()
+				.map(x -> mapper.map(x, Producto.class))
+				.toList();
 	}
 
 }
