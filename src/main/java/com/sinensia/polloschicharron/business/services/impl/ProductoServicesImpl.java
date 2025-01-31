@@ -142,8 +142,8 @@ public class ProductoServicesImpl implements ProductoServices{
 	
 		return productoPLRepository.getEstadisticaNumeroProductosPorFamilia()
 				.stream()
-				.collect(Collectors.toMap(x -> (Familia) x[0], 
-						                  x -> ((Long) x[1]).intValue()));
+				.collect(Collectors.toMap(x -> mapper.map((FamiliaPL) x[0], Familia.class), 
+										  x -> ((Long) x[1]).intValue()));
 		
 	}
 
@@ -153,7 +153,7 @@ public class ProductoServicesImpl implements ProductoServices{
 		Map<Familia, Double> estadistica = new HashMap<>();
 		
 		productoPLRepository.getEstadisticaPrecioMedioProductosPorFamilia()
-			.forEach(x -> estadistica.put((Familia) x[0], (Double) x[1]));
+			.forEach(x -> estadistica.put(mapper.map((FamiliaPL) x[0], Familia.class), (Double) x[1]));
 		
 		return estadistica;
 	}
