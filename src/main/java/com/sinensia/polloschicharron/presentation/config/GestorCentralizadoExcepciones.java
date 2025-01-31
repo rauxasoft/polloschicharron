@@ -58,8 +58,6 @@ public class GestorCentralizadoExcepciones extends ResponseEntityExceptionHandle
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<Object> handleException(Exception ex){
 	
-		ex.printStackTrace(); // LOG
-		
 		HttpErrorCustomizado httpErrorCustomizado = new HttpErrorCustomizado("Se ha producido un error en el servidor.");
 		
 		return ResponseEntity.internalServerError().body(httpErrorCustomizado);
