@@ -8,6 +8,7 @@ import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
@@ -64,10 +65,11 @@ public class UsuarioPL implements Serializable{
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastPasswordResetDate;
 	
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="USER_ROLES", 
 	           joinColumns = @JoinColumn(name="ID_USER"), 
 	           inverseJoinColumns = @JoinColumn(name="ID_ROL"))
+	
 	private Set<RolePL> roles = new HashSet<>();
 
 	public UsuarioPL() {
