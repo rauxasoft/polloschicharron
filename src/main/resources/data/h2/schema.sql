@@ -1,3 +1,9 @@
+-- ******************************************************
+-- 
+--                    SECUENCIADORES
+-- 
+-- ******************************************************
+
 CREATE SEQUENCE "PERSONA_SEQ"
 	MINVALUE 1
 	MAXVALUE 999999999
@@ -29,6 +35,12 @@ CREATE SEQUENCE "FAMILIA_SEQ"
     START WITH 5000 
     NOCACHE 
     NOCYCLE;
+    
+-- ******************************************************
+-- 
+--                       MODEL 
+-- 
+-- ******************************************************
 
 CREATE TABLE FAMILIAS(
 	ID				BIGINT			NOT NULL,
@@ -116,4 +128,36 @@ CREATE TABLE LINEAS_PEDIDO(
 	PRECIO							DOUBLE			,
 	FOREIGN KEY (CODIGO_PEDIDO) REFERENCES PEDIDOS (CODIGO),
 	FOREIGN KEY (CODIGO_PRODUCTO) REFERENCES PRODUCTOS (CODIGO)
+);
+
+-- ******************************************************
+-- 
+--                  SPRING SECURITY 
+-- 
+-- ******************************************************
+
+CREATE TABLE ROLES (
+    ID 					       		BIGINT			    NOT NULL,
+    NAME                       		VARCHAR(50) 		NOT NULL,
+    PRIMARY KEY (ID)
+);
+
+CREATE TABLE USERS (
+    ID 								BIGINT		        NOT NULL,
+    USERNAME 						VARCHAR(50) 		NOT NULL UNIQUE,
+    PASSWORD 						VARCHAR(100) 		NOT NULL,
+    EMAIL 							VARCHAR(50) 		,
+    TELEFONO						VARCHAR(50)			,
+    ENABLED 						BOOLEAN 			NOT NULL,
+    FIRST_NAME 						VARCHAR(50) 		NOT NULL,
+    LAST_NAME 						VARCHAR(50) 		NOT NULL,
+    LAST_PASSWORD_RESET_DATE 		DATETIME 			NOT NULL,
+    PRIMARY KEY (ID)
+);
+
+CREATE TABLE USER_ROLES (
+    ID_USER                     	BIGINT              NOT NULL,
+    ID_ROL                      	BIGINT              NOT NULL,
+    FOREIGN KEY (ID_USER) REFERENCES USERS (ID),
+    FOREIGN KEY (ID_ROL) REFERENCES ROLES (ID)
 );
