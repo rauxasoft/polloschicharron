@@ -10,7 +10,6 @@ public class HomeAppController {
 
 	@GetMapping({"/home", "/"})
 	public String getHome() {		
-		System.err.println("ENTRAMOS");
-		return "index";       //     /WEB-INF/vistas/index.jsp   
+		return "index";
 	}
 }
