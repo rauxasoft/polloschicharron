@@ -61,6 +61,9 @@ public class SecurityConfig {
             
             .authorizeHttpRequests(auth ->
             
+            // TODO solverntar el acceso a páginas JSP
+            // TODO solventar el testing de controladores con seguridad
+            
             // dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
             
                     auth.requestMatchers("/auth/signin/**").permitAll()										// Permite el acceso controlador que entrega tokens

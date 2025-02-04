@@ -97,6 +97,4 @@ public class UserDetailsImpl implements UserDetails{
 		return email;
 	}
 
-
-
 }
