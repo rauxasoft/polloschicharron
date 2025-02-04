@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "polloschicharron.app.jwt-secret",
+      "type": "java.lang.String",
+      "description": "Clave privada para firmar los tokens"
+    },
+       {
+      "name": "polloschicharron.app.jwt-expiration-ms",
+      "type": "java.lang.Long",
+      "description": "Tiempo de expiración en milisegundos"
+    }
+  ]
+}

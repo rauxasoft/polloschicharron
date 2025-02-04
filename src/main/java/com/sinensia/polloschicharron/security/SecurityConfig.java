@@ -53,23 +53,25 @@ public class SecurityConfig {
 
         http.csrf(csrf -> csrf.disable())
             
-        	.exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
+        	.exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))		// Indicamos qué hacer en caso de usuario no autorizado
             
         	.headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin())) 			// Permitir el uso de iframes
         	
-        	.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        	.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))	// El servidor no establece sesiones
             
             .authorizeHttpRequests(auth ->
             
-                    auth.requestMatchers("/auth/signin/**").permitAll()
-                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers("/api/v1/jasper/**").permitAll()
-                        .requestMatchers("/h2-console/**").permitAll()										// Permiter el acceso a la consola H2
-                        .anyRequest().authenticated()
-                );
+            // dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
+            
+                    auth.requestMatchers("/auth/signin/**").permitAll()										// Permite el acceso controlador que entrega tokens
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()								// Permite cualquier petición con el verbo OPTIONS
+                        .requestMatchers("/app/home/**").permitAll()										// Permite el acceso a la aplicación JSP
+                        .requestMatchers("/h2-console/**").permitAll()										// Permite el acceso a la consola H2
+                        .anyRequest().authenticated()														// El resto requiere token   
+            		);
         
-        http.authenticationProvider(authenticationProvider());
-        http.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
+        http.authenticationProvider(authenticationProvider());												// Indicamos quién es el proveedor de autenticación. Quién decide quien pasa y quien no 
+        http.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);	// Incluimos el filtro de seguridad dentro de la cadena de filtros.
 
         return http.build();																																																																																																																					
     }
