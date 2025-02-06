@@ -19,7 +19,7 @@ public class ProductoPL {
 	
 	@Id
 	@Column(name="CODIGO")
-	@GeneratedValue(generator = "PRODUCTO_SEQ")
+	@GeneratedValue(generator="PRODUCTO_SEQ")
 	private Long id;
 	
 	private String nombre;
