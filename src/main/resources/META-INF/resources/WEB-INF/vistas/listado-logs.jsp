@@ -32,7 +32,7 @@
 							<fmt:formatDate pattern="dd/MM/yyyy" value="${log.timeStamp}" />
 						</td>
 						<td style="text-align: right;">
-							<fmt:formatDate pattern="HH:mm" value="${log.timeStamp}" />
+							<fmt:formatDate pattern="HH:mm:ss" value="${log.timeStamp}" />
 						</td>
 						<td>${log.path}</td>
 						<td>${log.method}</td>
