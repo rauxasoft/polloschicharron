@@ -7,6 +7,64 @@
 	},
 	"item": [
 		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the JSON response body\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Set the access_token in the environment variable if it exists\r",
+									"if (jsonData.token) {\r",
+									"    pm.environment.set(\"access_token\", jsonData.token);\r",
+									"}// Parse the JSON response body\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Set the access_token in the environment variable if it exists\r",
+									"if (jsonData.token) {\r",
+									"    pm.environment.set(\"access_token\", jsonData.token);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"u1\",\r\n    \"password\":\"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{puerto}}/auth/signin",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{puerto}}",
+							"path": [
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Empleados",
 			"item": [
 				{
@@ -435,14 +493,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://{{host}}:{{puerto}}/restr/productos/dtos/productoDTO1",
+									"raw": "http://{{host}}:{{puerto}}/rest/productos/dtos/productoDTO1",
 									"protocol": "http",
 									"host": [
 										"{{host}}"
 									],
 									"port": "{{puerto}}",
 									"path": [
-										"restr",
+										"rest",
 										"productos",
 										"dtos",
 										"productoDTO1"
@@ -454,9 +512,6 @@
 						{
 							"name": "DTO2",
 							"request": {
-								"auth": {
-									"type": "noauth"
-								},
 								"method": "GET",
 								"header": [],
 								"url": {
@@ -481,9 +536,6 @@
 				{
 					"name": "obtener todos",
 					"request": {
-						"auth": {
-							"type": "noauth"
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -504,9 +556,6 @@
 				{
 					"name": "obtener por ID",
 					"request": {
-						"auth": {
-							"type": "noauth"
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -528,14 +577,11 @@
 				{
 					"name": "crear",
 					"request": {
-						"auth": {
-							"type": "noauth"
-						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"Producto POSTMAN\",\r\n    \"fechaAlta\": \"2017-10-21\",\r\n    \"descatalogado\": false,\r\n    \"familia\": {\r\n        \"id\": 4\r\n    },\r\n    \"precio\": 6.0,\r\n    \"descripcion\": \"Delicioso producto de pruebas\"\r\n}",
+							"raw": "{\r\n    \"nombre\": \"Agua de Montserrat\",\r\n    \"fechaAlta\": \"2017-10-21\",\r\n    \"descatalogado\": false,\r\n    \"familia\": {\r\n        \"id\": 7\r\n    },\r\n    \"precio\": 670.0,\r\n    \"descripcion\": \"Deliciosa agua...\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -543,13 +589,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://10.250.9.11:{{puerto}}/rest/productos",
+							"raw": "http://localhost:{{puerto}}/rest/productos",
 							"protocol": "http",
 							"host": [
-								"10",
-								"250",
-								"9",
-								"11"
+								"localhost"
 							],
 							"port": "{{puerto}}",
 							"path": [
@@ -563,9 +606,6 @@
 				{
 					"name": "actualizar",
 					"request": {
-						"auth": {
-							"type": "noauth"
-						},
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -596,9 +636,6 @@
 				{
 					"name": "eliminar",
 					"request": {
-						"auth": {
-							"type": "noauth"
-						},
 						"method": "DELETE",
 						"header": [],
 						"body": {
@@ -634,9 +671,6 @@
 				{
 					"name": "obtener todos",
 					"request": {
-						"auth": {
-							"type": "noauth"
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -678,9 +712,6 @@
 				{
 					"name": "crear",
 					"request": {
-						"auth": {
-							"type": "noauth"
-						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -708,6 +739,38 @@
 					"response": []
 				}
 			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }

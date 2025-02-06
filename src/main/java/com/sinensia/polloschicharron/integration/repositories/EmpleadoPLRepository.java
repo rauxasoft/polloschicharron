@@ -15,14 +15,14 @@ public interface EmpleadoPLRepository extends JpaRepository<EmpleadoPL, Long>{
 			+ "e.nombre,                                                                           "
 			+ "CONCAT(e.apellido1, COALESCE(CONCAT(' ', e.apellido2), '')),                        "
 			+ " e.licenciaManipuladorAlimentos)                                                    "
-			+ "FROM EmpleadoPL e                                                                     ")
+			+ "FROM EmpleadoPL e                                                                   ")
 	List<EmpleadoDTO1> findDTO1();
 	
 	@Query("SELECT new com.sinensia.polloschicharron.business.model.dtos.EmpleadoDTO2(              "
 			+ " UPPER(CONCAT (e.apellido1, COALESCE(CONCAT(' ', e.apellido2), ''), ', ', e.nombre)),"
 			+ " e.datosContacto.telefono,                                                           "
 			+ " e.datosContacto.email)                                                              "
-			+ "FROM EmpleadoPL e                                                                      ")
+			+ "FROM EmpleadoPL e                                                                    ")
 	List<EmpleadoDTO2> findDTO2();
 	
 }
