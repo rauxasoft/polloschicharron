@@ -11,15 +11,19 @@ import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MvcResult;
 
+import com.sinensia.polloschicharron.auditoria.AuditFilter;
 import com.sinensia.polloschicharron.business.model.Empleado;
 import com.sinensia.polloschicharron.business.services.EmpleadoServices;
 import com.sinensia.polloschicharron.presentation.config.HttpErrorCustomizado;
 
-@WebMvcTest(EmpleadoController.class)
+@WebMvcTest(value=EmpleadoController.class, 
+            excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = AuditFilter.class))
 @WithMockUser(username="u1", roles={"SUPER_ADMIN", "ADMIN", "USER"})
 public class EmpleadoControllerTest extends AbstractControllerTest{
 

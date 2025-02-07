@@ -14,9 +14,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.Arrays;
 import java.util.List;
 
+import com.sinensia.polloschicharron.auditoria.AuditFilter;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MvcResult;
@@ -25,8 +29,13 @@ import com.sinensia.polloschicharron.business.model.Familia;
 import com.sinensia.polloschicharron.business.services.FamiliaServices;
 import com.sinensia.polloschicharron.presentation.config.HttpErrorCustomizado;
 
-@WebMvcTest(FamiliaController.class)
+@WebMvcTest(value=FamiliaController.class,
+			excludeFilters = @ComponentScan.Filter(
+								type = FilterType.ASSIGNABLE_TYPE,
+								classes = AuditFilter.class))
+
 @WithMockUser(username="u1", roles={"SUPER_ADMIN", "ADMIN", "USER"})
+
 public class FamiliaControllerTest extends AbstractControllerTest{
 
 	@MockitoBean

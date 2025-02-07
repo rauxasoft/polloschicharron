@@ -31,8 +31,8 @@ public class JwtUtils {
     public String generateJwtToken(Authentication authentication) {
 
         UserDetailsImpl userDetailsImpl = (UserDetailsImpl) authentication.getPrincipal();
-
-        List<String> roles = userDetailsImpl.getAuthorities().stream().map(x -> x.toString()).toList();
+     
+        List<String> roles = userDetailsImpl.getAuthorities().stream().map(Object::toString).toList();
         String nombreCompleto = userDetailsImpl.getFirstName() + " " + userDetailsImpl.getLastName();
 
         return Jwts.builder()
