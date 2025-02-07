@@ -62,7 +62,8 @@ public class SecurityConfig {
                 auth.requestMatchers(HttpMethod.POST, "/auth/signin/**").permitAll() // Permite el acceso al controlador que entrega tokens
                     .requestMatchers("/WEB-INF/**").permitAll() 					 // Permite acceso a JSP en WEB-INF    
                     .requestMatchers("/img/**", "/css/**", "/js/**").permitAll() 	 // Permite acceso a recursos estáticos
-                //  .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()			 // Permite cualquier petición con el verbo OPTIONS
+                    .requestMatchers("/favicon.ico").permitAll() 	 				 // Permite acceso al favicon.ico
+                    .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()			 // Permite cualquier petición con el verbo OPTIONS
                     .requestMatchers("/app/**").permitAll()	  						 // Permite el acceso a la aplicación JSP
                     .requestMatchers("/admin/auditoria/**").permitAll() 			 // Permite el acceso a la página de Logs
                     .requestMatchers("/h2-console/**").permitAll()					 // Permite el acceso a la consola H2

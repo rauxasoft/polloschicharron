@@ -1,7 +1,6 @@
 package com.sinensia.polloschicharron.security;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,29 +22,7 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter{
 	 
 	 @Autowired
 	 private UserDetailsServiceImpl userDetailsService;
-	 
-	 public static final List<String> EXCLUDED_PATHS = List.of(
-		        "/auth/signin",
-		        "/WEB-INF",
-		        "/img",
-		        "/css",
-		        "/js",
-		        "/favicon.ico",
-		        "/app",       
-		        "/admin/auditoria",
-		        "/h2-console"
-		    );
-	 
-	 @Override
-	 protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-		
-		String path = request.getServletPath(); 
-		
-		boolean excluido = EXCLUDED_PATHS.stream().anyMatch(path::startsWith);
-		
-		return excluido;
-	 }
-	 	
+	 	 	
 	 @Override
 	 protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 		 

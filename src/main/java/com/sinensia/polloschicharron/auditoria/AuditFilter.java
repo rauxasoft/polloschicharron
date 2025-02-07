@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.sinensia.polloschicharron.auditoria.integration.model.RequestLogPL;
 import com.sinensia.polloschicharron.auditoria.integration.repositories.RequestLogPLRepository;
@@ -16,7 +17,7 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-//@Component
+@Component
 public class AuditFilter implements Filter {
 
 	@Autowired
