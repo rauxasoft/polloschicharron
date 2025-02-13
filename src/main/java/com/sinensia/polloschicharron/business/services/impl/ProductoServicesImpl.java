@@ -80,10 +80,10 @@ public class ProductoServicesImpl implements ProductoServices{
 		
 		if(!existe) {
 			throw new IllegalStateException("El producto con ID [" + id + "] no existe.");	
+		} else {
+			Optional<ProductoPL> optionalPL = productoPLRepository.findById(id);
+			optionalPL.get().setDescatalogado(true);	
 		}
-    
-		Optional<ProductoPL> optionalPL = productoPLRepository.findById(id);
-		optionalPL.get().setDescatalogado(true);
 
 	}
 

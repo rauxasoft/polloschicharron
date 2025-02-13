@@ -20,8 +20,11 @@ import jakarta.servlet.http.HttpServletResponse;
 @Component
 public class AuditFilter implements Filter {
 
-	@Autowired
 	private RequestLogPLRepository requestLogPLRepository;
+	
+	public AuditFilter(RequestLogPLRepository requestLogPLRepository) {
+		this.requestLogPLRepository = requestLogPLRepository;
+	}
 	
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
