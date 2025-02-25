@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
@@ -21,10 +20,13 @@ import jakarta.servlet.http.HttpServletResponse;
 public class JwtAuthEntryPoint implements AuthenticationEntryPoint{
 
 	private static final Logger logger = LoggerFactory.getLogger(JwtAuthEntryPoint.class);
-    
-    @Autowired
+ 
     private ObjectMapper objectMapper;
 
+    public JwtAuthEntryPoint(ObjectMapper objectMapper) {
+    	this.objectMapper = objectMapper;
+    }
+    
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
     

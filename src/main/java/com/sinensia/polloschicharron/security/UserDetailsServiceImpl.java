@@ -1,6 +1,5 @@
 package com.sinensia.polloschicharron.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,8 +11,11 @@ import com.sinensia.polloschicharron.security.integration.repositories.UsuarioPL
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService{
 
-	@Autowired
 	private UsuarioPLRepository usuarioPLRepository;
+	
+	public UserDetailsServiceImpl(UsuarioPLRepository usuarioPLRepository) {
+		this.usuarioPLRepository = usuarioPLRepository;
+	}
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
